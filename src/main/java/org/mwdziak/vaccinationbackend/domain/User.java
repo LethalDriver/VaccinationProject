@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class User implements UserDetails {
     @Nonnull
     private String lastName;
     @Nonnull
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @Nonnull
     private Role role;
 
