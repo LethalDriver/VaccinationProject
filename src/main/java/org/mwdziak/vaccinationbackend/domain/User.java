@@ -4,8 +4,8 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.Table;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,8 +14,11 @@ import java.util.Collection;
 import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Builder
+@Table(name = "_users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
@@ -33,7 +36,7 @@ public class User implements UserDetails {
     @Nonnull
     private Role role;
 
-    private enum Role {
+    public enum Role {
         USER, ADMIN
     }
 
