@@ -20,4 +20,6 @@ public class AdministeredVaccination {
     private Vaccination vaccination;
     @Nonnull
     private LocalDateTime date;
+    @Nonnull
+    private LocalDateTime nextDoseDate;
 }
