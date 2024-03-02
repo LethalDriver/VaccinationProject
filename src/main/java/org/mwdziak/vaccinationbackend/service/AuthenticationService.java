@@ -4,13 +4,10 @@ package org.mwdziak.vaccinationbackend.service;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.BlacklistedToken;
 
-import org.mwdziak.vaccinationbackend.domain.User;
 import org.mwdziak.vaccinationbackend.dto.AuthenticationRequest;
 import org.mwdziak.vaccinationbackend.dto.AuthenticationResponse;
-import org.mwdziak.vaccinationbackend.dto.RegistrationRequest;
 import org.mwdziak.vaccinationbackend.dto.TokensDTO;
 import org.mwdziak.vaccinationbackend.exception.TokenBlacklistedException;
-import org.mwdziak.vaccinationbackend.exception.UserAlreadyExistsException;
 import org.mwdziak.vaccinationbackend.repository.BlacklistedTokenRepository;
 import org.mwdziak.vaccinationbackend.repository.UserRepository;
 
@@ -29,30 +26,6 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final BlacklistedTokenRepository blacklistedTokenRepository;
-    public AuthenticationResponse register(RegistrationRequest request) {
-        if (repository.existsByEmail(request.getEmail())) {
-            throw new UserAlreadyExistsException("User already exists");
-        }
-
-        var user = User.builder()
-            .firstName(request.getFirstName())
-            .lastName(request.getLastName())
-            .email(request.getEmail())
-            .password(encoder.encode(request.getPassword()))
-            .build();
-
-        repository.save(user);
-
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        var expirationDate = jwtService.extractExpiration(refreshToken);
-
-        return AuthenticationResponse.builder()
-            .token(jwtToken)
-            .refreshToken(refreshToken)
-            .expirationDate(expirationDate.toString())
-            .build();
-    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         var userOptional = repository.findByEmail(request.getEmail());
