@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -37,7 +39,8 @@ public class UserService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(encoder.encode(request.getPassword()))
-                .dateOfBirth(request.getDateOfBirth())
+                .dateOfBirth(LocalDate.parse(request.getDateOfBirth()))
+                .role(User.Role.USER)
                 .build();
 
         return userRepository.save(user);
