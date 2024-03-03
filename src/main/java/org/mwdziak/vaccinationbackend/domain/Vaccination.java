@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @MappedSuperclass
+@NoArgsConstructor
 public abstract class Vaccination {
     @Id
     @GeneratedValue
