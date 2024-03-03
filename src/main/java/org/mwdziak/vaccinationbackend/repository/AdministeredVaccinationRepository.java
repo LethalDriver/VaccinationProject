@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AdministeredVaccinationRepository extends JpaRepository<AdministeredVaccination, Long>, VaccinationRepository {
+public interface AdministeredVaccinationRepository extends JpaRepository<AdministeredVaccination, Long> {
+    List<AdministeredVaccination> findAllByUser_Id(Long userId);
 }
