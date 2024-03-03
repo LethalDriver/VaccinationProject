@@ -22,7 +22,5 @@ public abstract class Vaccination {
     @ManyToOne(cascade = CascadeType.ALL)
     private Vaccine vaccine;
     @Nonnull
-    private LocalDateTime date;
-    @Nonnull
-    private LocalDateTime nextDoseDate;
+    private LocalDateTime dateTime;
 }
