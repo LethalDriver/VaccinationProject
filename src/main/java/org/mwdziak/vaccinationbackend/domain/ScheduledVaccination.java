@@ -17,7 +17,7 @@ public class ScheduledVaccination {
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
     @ManyToOne(cascade = CascadeType.ALL)
-    private Vaccination vaccination;
+    private Vaccine vaccine;
     @Nonnull
     private LocalDateTime date;
     @Nonnull
