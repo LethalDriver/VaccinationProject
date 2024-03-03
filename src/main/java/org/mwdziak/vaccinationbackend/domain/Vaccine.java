@@ -19,6 +19,7 @@ public class Vaccine {
     @Nonnull
     private String name;
     private Integer recommendedAge;
+    @Nonnull
     private Integer doses;
     private Integer daysBetweenDoses;
 }
