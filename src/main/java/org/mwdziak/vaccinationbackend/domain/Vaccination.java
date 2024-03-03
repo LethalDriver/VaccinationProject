@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 
 @Data
 @SuperBuilder
-@AllArgsConstructor
-@RequiredArgsConstructor
 @MappedSuperclass
 @NoArgsConstructor
 public abstract class Vaccination {

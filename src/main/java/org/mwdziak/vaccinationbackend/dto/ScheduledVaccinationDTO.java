@@ -7,7 +7,7 @@ public record ScheduledVaccinationDTO(
         @Nonnull VaccineDTO vaccine,
         @Nonnull String dateTime,
         String nextDoseDateTime,
-        String remainderDateTime
+        String reminderDateTime
 ){
 
 }
