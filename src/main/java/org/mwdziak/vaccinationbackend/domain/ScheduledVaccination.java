@@ -16,6 +16,6 @@ import java.time.LocalDateTime;
 public class ScheduledVaccination extends Vaccination {
     LocalDateTime reminderDateTime;
     @Nonnull
-    private LocalDateTime nextDoseDate;
+    private LocalDateTime nextDoseDateTime;
 }
 
