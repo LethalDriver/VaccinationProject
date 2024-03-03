@@ -58,15 +58,13 @@ public class VaccinationRepositoryTests extends RepositoryTests{
         AdministeredVaccination administeredVaccination1 = AdministeredVaccination.builder()
                 .user(user)
                 .vaccine(vaccineRepository.findByName("testVaccine").get())
-                .date(LocalDateTime.now().minusDays(5))
-                .nextDoseDate(LocalDateTime.now().plusDays(30))
+                .dateTime(LocalDateTime.now().minusDays(5))
                 .build();
 
         AdministeredVaccination administeredVaccination2 = AdministeredVaccination.builder()
                 .user(user)
                 .vaccine(vaccineRepository.findByName("testVaccine2").get())
-                .date(LocalDateTime.now().minusDays(20))
-                .nextDoseDate(LocalDateTime.now().plusDays(10))
+                .dateTime(LocalDateTime.now().minusDays(20))
                 .build();
 
         administeredVaccinationRepository.save(administeredVaccination1);
