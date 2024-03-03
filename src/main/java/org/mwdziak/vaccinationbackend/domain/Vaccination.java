@@ -3,14 +3,14 @@ package org.mwdziak.vaccinationbackend.domain;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @RequiredArgsConstructor
-@NoArgsConstructor
 @MappedSuperclass
 public abstract class Vaccination {
     @Id
