@@ -81,25 +81,22 @@ public class UserServiceTests {
                 .lastName("last")
                 .dateOfBirth("1990-01-01")
                 .build();
-        when(userRepository.existsByEmail("test")).thenReturn(false);
-        when(userRepository.save(User.builder()
+
+        var user = User.builder()
                 .email("test")
                 .password("password")
                 .firstName("first")
                 .lastName("last")
                 .dateOfBirth(LocalDate.parse("1990-01-01"))
                 .role(User.Role.USER)
-                .build()))
-                .thenReturn(User.builder()
-                        .email("test")
-                        .password("password")
-                        .firstName("first")
-                        .lastName("last")
-                        .dateOfBirth(LocalDate.parse("1990-01-01"))
-                        .role(User.Role.USER)
-                        .build());
+                .build();
+
+        when(userRepository.existsByEmail("test")).thenReturn(false);
+        when(userRepository.save(user)).thenReturn(user);
         when (encoder.encode("password")).thenReturn("password");
-        User user = userService.registerUser(request);
+
+        User saved = userService.registerUser(request);
+
         assertNotNull(user);
     }
 }
