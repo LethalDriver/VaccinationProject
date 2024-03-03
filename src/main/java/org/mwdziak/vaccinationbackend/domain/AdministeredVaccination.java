@@ -1,15 +1,16 @@
 package org.mwdziak.vaccinationbackend.domain;
 
-import jakarta.annotation.Nonnull;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 
 @Entity
-public class AdministeredVaccination extends Vaccination{
+@SuperBuilder
+@RequiredArgsConstructor
+public class AdministeredVaccination extends Vaccination {
 }
