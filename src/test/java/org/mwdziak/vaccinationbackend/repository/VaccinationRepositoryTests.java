@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mwdziak.vaccinationbackend.domain.AdministeredVaccination;
 import org.mwdziak.vaccinationbackend.domain.User;
+import org.mwdziak.vaccinationbackend.domain.Vaccination;
 import org.mwdziak.vaccinationbackend.domain.Vaccine;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -54,14 +55,14 @@ public class VaccinationRepositoryTests extends RepositoryTests{
 
     @Test
     public void administeredRepositoryShouldReturnAllVaccinationsForUser() {
-        var administeredVaccination1 = AdministeredVaccination.builder()
+        AdministeredVaccination administeredVaccination1 = AdministeredVaccination.builder()
                 .user(user)
                 .vaccine(vaccineRepository.findByName("testVaccine").get())
                 .date(LocalDateTime.now().minusDays(5))
                 .nextDoseDate(LocalDateTime.now().plusDays(30))
                 .build();
 
-        var administeredVaccination2 = AdministeredVaccination.builder()
+        AdministeredVaccination administeredVaccination2 = AdministeredVaccination.builder()
                 .user(user)
                 .vaccine(vaccineRepository.findByName("testVaccine2").get())
                 .date(LocalDateTime.now().minusDays(20))
@@ -72,7 +73,6 @@ public class VaccinationRepositoryTests extends RepositoryTests{
         administeredVaccinationRepository.save(administeredVaccination2);
 
         List<AdministeredVaccination> administeredVaccinations = administeredVaccinationRepository.findAllByUser_Id(user.getId());
-
         assertEquals(2, administeredVaccinations.size());
     }
     @Test
