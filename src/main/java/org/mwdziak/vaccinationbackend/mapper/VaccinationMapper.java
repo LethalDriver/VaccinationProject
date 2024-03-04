@@ -1,5 +1,6 @@
 package org.mwdziak.vaccinationbackend.mapper;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Named;
 
 import java.time.LocalDateTime;
