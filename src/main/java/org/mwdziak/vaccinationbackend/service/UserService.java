@@ -1,5 +1,6 @@
 package org.mwdziak.vaccinationbackend.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.User;
 import org.mwdziak.vaccinationbackend.dto.RegistrationRequest;
@@ -30,7 +31,9 @@ public class UserService {
     }
 
     public User getCurrentUser() {
-        return userRepository.findByEmail(getCurrentUserEmail()).orElseThrow();
+        return userRepository.findByEmail(getCurrentUserEmail()).orElseThrow(
+                () -> new EntityNotFoundException("User not found")
+        );
     }
 
     public User registerUser(RegistrationRequest request) {
