@@ -29,6 +29,10 @@ public class UserService {
         return null;
     }
 
+    public User getCurrentUser() {
+        return userRepository.findByEmail(getCurrentUserEmail()).orElseThrow();
+    }
+
     public User registerUser(RegistrationRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new UserAlreadyExistsException("User already exists");
