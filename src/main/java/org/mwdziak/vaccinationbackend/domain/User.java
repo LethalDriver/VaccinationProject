@@ -1,10 +1,7 @@
 package org.mwdziak.vaccinationbackend.domain;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -35,6 +33,10 @@ public class User implements UserDetails {
     private LocalDate dateOfBirth;
     @Nonnull
     private Role role;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<ScheduledVaccination> scheduledVaccinations;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<AdministeredVaccination> administeredVaccinations;
 
     public enum Role {
         USER, ADMIN
