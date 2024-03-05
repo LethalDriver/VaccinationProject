@@ -11,7 +11,6 @@ import org.mwdziak.vaccinationbackend.mapper.AdministeredVaccinationMapper;
 import org.mwdziak.vaccinationbackend.mapper.ScheduledVaccinationMapper;
 import org.mwdziak.vaccinationbackend.repository.AdministeredVaccinationRepository;
 import org.mwdziak.vaccinationbackend.repository.ScheduledVaccinationRepository;
-import org.mwdziak.vaccinationbackend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,7 +39,7 @@ public class VaccinationService {
         existingVaccination.setVaccine(updatedVaccination.getVaccine());
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
         existingVaccination.setNextDoseDateTime(updatedVaccination.getNextDoseDateTime());
-        existingVaccination.setReminderDateTime(updatedVaccination.getReminderDateTime());
+        existingVaccination.setReminders(updatedVaccination.getReminders());
 
         return scheduledVaccinationRepository.save(existingVaccination);
     }

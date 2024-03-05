@@ -1,12 +1,11 @@
 package org.mwdziak.vaccinationbackend.mapper;
 
-import org.mapstruct.AfterMapping;
 import org.mapstruct.Named;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public interface VaccinationMapper {
+public interface DateParser {
     @Named("dateTimeToString")
     default String dateToString(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
