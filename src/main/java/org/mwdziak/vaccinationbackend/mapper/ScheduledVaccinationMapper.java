@@ -14,11 +14,9 @@ import java.time.format.DateTimeFormatter;
 public interface ScheduledVaccinationMapper extends DateParser {
     @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "dateTimeToString")
     @Mapping(source = "nextDoseDateTime", target = "nextDoseDateTime", qualifiedByName = "dateTimeToString")
-    @Mapping(source = "reminderDateTime", target = "reminderDateTime", qualifiedByName = "dateTimeToString")
     ScheduledVaccinationDTO toDto(ScheduledVaccination scheduledVaccination);
 
     @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "stringToDateTime")
     @Mapping(source = "nextDoseDateTime", target = "nextDoseDateTime", qualifiedByName = "stringToDateTime")
-    @Mapping(source = "reminderDateTime", target = "reminderDateTime", qualifiedByName = "stringToDateTime")
     ScheduledVaccination toEntity(ScheduledVaccinationDTO scheduledVaccinationDTO);
 }
