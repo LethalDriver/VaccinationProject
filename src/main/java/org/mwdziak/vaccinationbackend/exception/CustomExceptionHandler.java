@@ -2,6 +2,8 @@ package org.mwdziak.vaccinationbackend.exception;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
     @ExceptionHandler({RuntimeException.class})
     public ProblemDetail handleSecurityExceptions(Exception e) {
@@ -47,6 +50,7 @@ public class CustomExceptionHandler {
                 "User already exists"
             );
         } else {
+            logger.error("Unhandled exception", e);
             problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatusCode.valueOf(500),
                 "Internal server error"
