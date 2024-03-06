@@ -16,9 +16,9 @@ public class ReminderScheduler {
     private final ReminderService reminderService;
     private final ReminderEmitter reminderEmitter;
     private final TaskScheduler taskScheduler;
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 6000)
     public void scheduleReminders() {
-        List<Reminder> reminders = reminderService.getRemindersToBeSend(1);
+        List<Reminder> reminders = reminderService.getRemindersToBeSend(5);
         reminders.forEach(reminder -> scheduleReminder(reminderService.getMinutesToExecute(reminder)));
     }
 
