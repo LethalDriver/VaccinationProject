@@ -6,7 +6,7 @@ import java.util.List;
 
 public record ScheduledVaccinationDTO(
         Long id,
-        @Nonnull VaccineDTO vaccine,
+        @Nonnull Long vaccineId,
         @Nonnull String dateTime,
         String nextDoseDateTime,
         List<ReminderDTO> reminders
