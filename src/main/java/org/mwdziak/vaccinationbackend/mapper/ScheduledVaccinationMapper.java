@@ -10,7 +10,7 @@ import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationDTO;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Mapper(uses = {VaccineMapper.class, ReminderMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
+@Mapper(uses = {ReminderMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface ScheduledVaccinationMapper extends DateParser {
     @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "dateTimeToString")
     @Mapping(source = "nextDoseDateTime", target = "nextDoseDateTime", qualifiedByName = "dateTimeToString")
