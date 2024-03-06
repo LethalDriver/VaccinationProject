@@ -27,7 +27,7 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails){
-        return generateToken(userDetails, 1000 * 60L);
+        return generateToken(userDetails, 1000 * 48 * 60L);
     }
 
     public String generateToken(
