@@ -42,7 +42,7 @@ public class AdministeredVaccinationMapperTests {
     @Test
     public void shouldMapAdministeredVaccinationToAdministeredVaccinationDTO() {
         assertAll(
-                () -> assertEquals(administeredVaccination.getVaccine().getId(), administeredVaccinationDTO.vaccine().id()),
+                () -> assertEquals(administeredVaccination.getVaccine().getId(), administeredVaccinationDTO.vaccineId()),
                 () -> assertEquals(administeredVaccination.getDateTime(), LocalDateTime.parse(administeredVaccinationDTO.dateTime(), FORMATTER))
         );
     }
@@ -52,7 +52,7 @@ public class AdministeredVaccinationMapperTests {
         AdministeredVaccination mappedAdministeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationDTO);
 
         assertAll(
-                () -> assertEquals(administeredVaccinationDTO.vaccine().id(), mappedAdministeredVaccination.getVaccine().getId()),
+                () -> assertEquals(administeredVaccinationDTO.vaccineId(), mappedAdministeredVaccination.getVaccine().getId()),
                 () -> assertEquals(administeredVaccinationDTO.dateTime(), mappedAdministeredVaccination.getDateTime().format(FORMATTER))
         );
     }
