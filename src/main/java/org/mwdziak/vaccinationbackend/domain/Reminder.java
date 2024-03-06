@@ -16,4 +16,5 @@ public class Reminder {
     private String dateTime;
     @ManyToOne(cascade = CascadeType.ALL)
     private ScheduledVaccination scheduledVaccination;
+    private boolean sent;
 }
