@@ -1,7 +1,10 @@
 package org.mwdziak.vaccinationbackend.mapper;
 
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
