@@ -1,5 +1,8 @@
 package org.mwdziak.vaccinationbackend.service;
 
+
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,12 +13,12 @@ import org.mwdziak.vaccinationbackend.domain.Reminder;
 import org.mwdziak.vaccinationbackend.repository.ReminderRepository;
 import org.springframework.scheduling.TaskScheduler;
 
-import java.time.Instant;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
+import static org.awaitility.Awaitility.await;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -43,13 +46,10 @@ public class ReminderServiceTests {
     }
 
     @Test
-    public void testScheduleReminders() {
-        List<Reminder> reminders = Arrays.asList(reminder);
-        when(reminderRepository.findToBeSendInNextMinutes(any(LocalDateTime.class))).thenReturn(reminders);
-
-        reminderService.scheduleReminders();
-
-        verify(taskScheduler, times(1)).schedule(any(Runnable.class), any(Instant.class));
+    public void should_return_reminders_to_be_send() {
+        when(reminderRepository.findToBeSendInNextMinutes(any(LocalDateTime.class))).thenReturn(Arrays.asList(reminder));
+        List<Reminder> reminders = reminderService.getRemindersToBeSend(1);
+        Assertions.assertEquals(1, reminders.size());
     }
 
     @Test
@@ -57,4 +57,6 @@ public class ReminderServiceTests {
         int minutes = reminderService.getMinutesToExecute(reminder);
         assert(minutes >= 0);
     }
+
+
 }
