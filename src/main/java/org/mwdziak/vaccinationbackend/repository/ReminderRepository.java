@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
     @Query("SELECT r FROM Reminder r WHERE r.dateTime <= :time AND r.sent = false")
-    Reminder findToBeSendInNextMinutes(@Param("time") LocalDateTime time);
+    List<Reminder> findToBeSendInNextMinutes(@Param("time") LocalDateTime time);
 }
