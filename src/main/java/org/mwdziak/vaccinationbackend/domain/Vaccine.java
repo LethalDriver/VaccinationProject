@@ -24,4 +24,11 @@ public class Vaccine {
     @Nonnull
     private Integer doses;
     private Integer daysBetweenDoses;
+
+    public Vaccine(@Nonnull String name, Integer recommendedAge, @Nonnull Integer doses, Integer daysBetweenDoses) {
+        this.name = name;
+        this.recommendedAge = recommendedAge;
+        this.doses = doses;
+        this.daysBetweenDoses = daysBetweenDoses;
+    }
 }
