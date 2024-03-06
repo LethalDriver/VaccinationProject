@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository repository;
-    private final PasswordEncoder encoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final BlacklistedTokenRepository blacklistedTokenRepository;
