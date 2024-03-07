@@ -1,6 +1,7 @@
-package org.mwdziak.vaccinationbackend.service;
+package org.mwdziak.vaccinationbackend.scheduling;
 
 import lombok.RequiredArgsConstructor;
+import org.mwdziak.vaccinationbackend.service.ReminderEmitter;
 import org.springframework.stereotype.Component;
 
 @Component

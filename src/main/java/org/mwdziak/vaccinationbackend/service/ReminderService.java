@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class ReminderService {
     private final ReminderRepository reminderRepository;
 
-    List<Reminder> getRemindersToBeSend(Integer minutes) {
+    public List<Reminder> getRemindersToBeSend(Integer minutes) {
         LocalDateTime nextMinutes = LocalDateTime.now().plusMinutes(minutes);
         return reminderRepository.findToBeSendInNextMinutes(nextMinutes);
     }
