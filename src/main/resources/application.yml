@@ -6,3 +6,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: reminders
