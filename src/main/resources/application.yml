@@ -1,6 +1,7 @@
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:8083/test
     username: root
     password: root
   jpa:
@@ -11,3 +12,5 @@ spring:
     bootstrap-servers: localhost:9092
     template:
       default-topic: reminders
+server:
+  port: 8081
