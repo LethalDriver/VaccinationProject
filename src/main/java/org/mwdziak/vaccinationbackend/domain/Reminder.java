@@ -20,5 +20,4 @@ public class Reminder {
     @ManyToOne(cascade = CascadeType.ALL)
     private ScheduledVaccination scheduledVaccination;
     private boolean sent;
-    private String Message = "Upcoming vaccination on: " + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 }
