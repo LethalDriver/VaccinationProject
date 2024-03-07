@@ -21,11 +21,11 @@ public class ReminderScheduler {
     @Scheduled(fixedRate = 6000)
     public void scheduleReminders() {
         List<Reminder> reminders = reminderService.getRemindersToBeSend(5);
-        reminders.forEach(reminder -> scheduleReminder(reminderService.getMinutesToExecute(reminder)));
+        reminders.forEach(reminder -> scheduleReminder(reminderService.getMinutesToExecute(reminder), reminder));
     }
 
-    private void scheduleReminder(Integer minutesToExecute) {
+    private void scheduleReminder(Integer minutesToExecute, Reminder reminder) {
         Instant instant = Instant.now().plusMillis(TimeUnit.MINUTES.toMillis(minutesToExecute));
-        taskScheduler.schedule(new ReminderSenderTask(reminderEmitter), instant);
+        taskScheduler.schedule(new ReminderSenderTask(reminderEmitter, reminder), instant);
     }
 }
