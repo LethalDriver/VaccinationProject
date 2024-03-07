@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -19,4 +20,5 @@ public class Reminder {
     @ManyToOne(cascade = CascadeType.ALL)
     private ScheduledVaccination scheduledVaccination;
     private boolean sent;
+    private String Message = "Upcoming vaccination on:" + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 }
