@@ -12,5 +12,7 @@ spring:
     bootstrap-servers: localhost:29092
     template:
       default-topic: reminders
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 server:
   port: 8081
