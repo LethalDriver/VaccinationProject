@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class ScheduledVaccination extends Vaccination {
-    @OneToMany(mappedBy = "scheduledVaccination", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "scheduledVaccination", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Reminder> reminders;
     @Nonnull
     private LocalDateTime nextDoseDateTime;
