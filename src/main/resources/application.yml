@@ -9,7 +9,7 @@ spring:
       ddl-auto: create-drop
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:29092
     template:
       default-topic: reminders
 server:
