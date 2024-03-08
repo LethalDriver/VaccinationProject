@@ -18,7 +18,7 @@ public interface ReminderMapper {
     ReminderDTO toDto(Reminder reminder);
     @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "reminderStringToDate")
     Reminder toEntity(ReminderDTO reminderDTO);
-    @Mapping(source = "scheduledVaccination", target = "dateTime", qualifiedByName = "scheduledVaccinationToScheduledVaccinationDateTimeString")
+    @Mapping(source = "scheduledVaccination", target = "vaccinationDateTime", qualifiedByName = "scheduledVaccinationToScheduledVaccinationDateTimeString")
     ReminderMessage toMessage(Reminder reminder);
 
     @Named("reminderDateToString")

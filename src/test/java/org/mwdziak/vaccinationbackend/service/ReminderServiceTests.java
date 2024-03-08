@@ -47,7 +47,7 @@ public class ReminderServiceTests {
 
     @Test
     public void should_return_reminders_to_be_send() {
-        when(reminderRepository.findToBeSendInNextMinutes(any(LocalDateTime.class))).thenReturn(Arrays.asList(reminder));
+        when(reminderRepository.findToBeSendInNextMinutes(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(Arrays.asList(reminder));
         List<Reminder> reminders = reminderService.getRemindersToBeSend(1);
         Assertions.assertEquals(1, reminders.size());
     }
