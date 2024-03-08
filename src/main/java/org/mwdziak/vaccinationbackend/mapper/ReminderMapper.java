@@ -1,9 +1,6 @@
 package org.mwdziak.vaccinationbackend.mapper;
 
-import org.mapstruct.Builder;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 import org.mwdziak.vaccinationbackend.domain.Reminder;
 import org.mwdziak.vaccinationbackend.domain.ScheduledVaccination;
 import org.mwdziak.vaccinationbackend.dto.ReminderDTO;
@@ -35,5 +32,10 @@ public interface ReminderMapper {
     default String scheduledVaccinationToScheduledVaccinationDateTimeString(ScheduledVaccination scheduledVaccination) {
         LocalDateTime dateTime = scheduledVaccination.getDateTime();
         return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+
+    @AfterMapping
+    default void setUserId(Reminder reminder, @MappingTarget ReminderMessage reminderMessage) {
+        reminderMessage.setUserId(reminder.getScheduledVaccination().getUser().getId());
     }
 }

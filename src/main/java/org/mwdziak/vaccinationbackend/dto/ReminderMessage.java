@@ -11,4 +11,5 @@ public class ReminderMessage {
     private Long id;
     private String dateTime;
     private String vaccinationDateTime;
+    private Long userId;
 }
