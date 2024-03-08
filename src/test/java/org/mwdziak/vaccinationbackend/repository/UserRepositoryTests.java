@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 
 
-public class UserRepositoryTests extends RepositoryTests{
+public class UserRepositoryTests extends RepositoryTests {
 
     @Autowired
     private UserRepository userRepository;

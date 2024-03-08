@@ -23,7 +23,7 @@ public class ReminderService {
 
     public List<Reminder> getRemindersToBeSend(Integer minutes) {
         LocalDateTime nextMinutes = LocalDateTime.now().plusMinutes(minutes);
-        return reminderRepository.findToBeSendInNextMinutes(LocalDateTime.now(), LocalDateTime.now().plusMinutes(minutes));
+        return reminderRepository.findToBeSendInNextMinutes(LocalDateTime.now(), nextMinutes);
     }
 
     public List<ReminderMessage> getReminderMessagesToBeSend(List<Reminder> reminders){
