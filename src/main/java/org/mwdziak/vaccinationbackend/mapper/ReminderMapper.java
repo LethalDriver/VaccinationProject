@@ -5,7 +5,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mwdziak.vaccinationbackend.domain.Reminder;
+import org.mwdziak.vaccinationbackend.domain.ScheduledVaccination;
 import org.mwdziak.vaccinationbackend.dto.ReminderDTO;
+import org.mwdziak.vaccinationbackend.dto.ReminderMessage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +18,8 @@ public interface ReminderMapper {
     ReminderDTO toDto(Reminder reminder);
     @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "reminderStringToDate")
     Reminder toEntity(ReminderDTO reminderDTO);
+    @Mapping(source = "scheduledVaccination", target = "dateTime", qualifiedByName = "scheduledVaccinationToScheduledVaccinationDateTimeString")
+    ReminderMessage toMessage(Reminder reminder);
 
     @Named("reminderDateToString")
     default String reminderDateToString(LocalDateTime dateTime) {
@@ -24,5 +28,11 @@ public interface ReminderMapper {
     @Named("reminderStringToDate")
     default LocalDateTime reminderStringToDate(String dateTime) {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+
+    @Named("scheduledVaccinationToScheduledVaccinationDateTimeString")
+    default String scheduledVaccinationToScheduledVaccinationDateTimeString(ScheduledVaccination scheduledVaccination) {
+        LocalDateTime dateTime = scheduledVaccination.getDateTime();
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }
