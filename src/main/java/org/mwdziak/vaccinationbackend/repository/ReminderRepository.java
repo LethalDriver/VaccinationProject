@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
-    @Query("SELECT r FROM Reminder r WHERE r.dateTime <= :time AND r.sent = false")
-    List<Reminder> findToBeSendInNextMinutes(@Param("time") LocalDateTime time);
+    @Query("SELECT r FROM Reminder r WHERE r.dateTime between :start and :end and r.sent = false")
+    List<Reminder> findToBeSendInNextMinutes(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }
