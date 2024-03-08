@@ -1,6 +1,7 @@
 package org.mwdziak.vaccinationbackend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationDTO;
 import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationDTO;
 import org.mwdziak.vaccinationbackend.service.VaccinationService;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,24 @@ public class VaccinationController {
     @DeleteMapping("/schedule/{id}")
     public ResponseEntity<Void> cancelVaccination(@PathVariable Long id) {
         vaccinationService.deleteScheduledVaccination(id);
+        return ResponseEntity.status(204).build();
+    }
+
+    @PostMapping("/administered")
+    public ResponseEntity<Void> administerVaccination(@RequestBody AdministeredVaccinationDTO administeredVaccinationDTO) {
+        vaccinationService.addAdministeredVaccination(administeredVaccinationDTO);
+        return ResponseEntity.status(201).build();
+    }
+
+    @PatchMapping("/administered")
+    public ResponseEntity<Void> editAdministeredVaccination(@RequestBody AdministeredVaccinationDTO administeredVaccinationDTO) {
+        vaccinationService.editAdministeredVaccination(administeredVaccinationDTO);
+        return ResponseEntity.status(204).build();
+    }
+
+    @DeleteMapping("/administered/{id}")
+    public ResponseEntity<Void> deleteAdministeredVaccination(@PathVariable Long id) {
+        vaccinationService.deleteAdministeredVaccination(id);
         return ResponseEntity.status(204).build();
     }
 }
