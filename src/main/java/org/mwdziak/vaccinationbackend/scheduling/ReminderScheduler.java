@@ -3,6 +3,7 @@ package org.mwdziak.vaccinationbackend.scheduling;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.Reminder;
 import org.mwdziak.vaccinationbackend.dto.ReminderMessage;
+import org.mwdziak.vaccinationbackend.repository.ReminderRepository;
 import org.mwdziak.vaccinationbackend.service.ReminderEmitter;
 import org.mwdziak.vaccinationbackend.service.ReminderService;
 import org.springframework.scheduling.TaskScheduler;
@@ -19,6 +20,7 @@ public class ReminderScheduler {
     private final ReminderService reminderService;
     private final ReminderEmitter reminderEmitter;
     private final TaskScheduler taskScheduler;
+    private final ReminderRepository reminderRepository;
     @Scheduled(fixedRate = 6000)
     public void scheduleReminders() {
         List<Reminder> reminders = reminderService.getRemindersToBeSend(5);
@@ -31,6 +33,7 @@ public class ReminderScheduler {
             Integer minutesToExecute = reminderService.getMinutesToExecute(reminder);
             scheduleReminder(minutesToExecute, reminderMessages.get(i));
             reminder.setSent(true);
+            reminderRepository.save(reminder);
         }
     }
 
