@@ -45,18 +45,18 @@ public class VaccinationService {
 
         scheduledVaccinationRepository.save(existingVaccination);
     }
-    public AdministeredVaccination addAdministeredVaccination(AdministeredVaccinationDTO administeredVaccinationDTO) {
+    public void addAdministeredVaccination(AdministeredVaccinationDTO administeredVaccinationDTO) {
         AdministeredVaccination administeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationDTO);
         User currentUser = userService.getCurrentUser();
         administeredVaccination.setUser(currentUser);
         findAndSetVaccine(administeredVaccinationDTO.id(), administeredVaccination);
-        return administeredVaccinationRepository.save(administeredVaccination);
+        administeredVaccinationRepository.save(administeredVaccination);
     }
     public void deleteAdministeredVaccination(Long id) {
         administeredVaccinationRepository.deleteById(id);
     }
 
-    public AdministeredVaccination editAdministeredVaccination(AdministeredVaccinationDTO administeredVaccinationDTO) {
+    public void editAdministeredVaccination(AdministeredVaccinationDTO administeredVaccinationDTO) {
         AdministeredVaccination updatedVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationDTO);
 
         AdministeredVaccination existingVaccination = administeredVaccinationRepository.findById(administeredVaccinationDTO.id())
@@ -65,7 +65,7 @@ public class VaccinationService {
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
         findAndSetVaccine(administeredVaccinationDTO.id(), existingVaccination);
 
-        return administeredVaccinationRepository.save(existingVaccination);
+        administeredVaccinationRepository.save(existingVaccination);
     }
 
     public <T extends Vaccination> void findAndSetVaccine(Long vaccineId, T vaccination) {
