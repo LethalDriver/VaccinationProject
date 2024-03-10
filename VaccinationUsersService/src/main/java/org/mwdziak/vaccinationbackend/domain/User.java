@@ -33,6 +33,7 @@ public class User implements UserDetails {
     private LocalDate dateOfBirth;
     @Nonnull
     private Role role;
+    private String notificationToken;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<ScheduledVaccination> scheduledVaccinations;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
