@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class ReminderService {
     private final ReminderRepository reminderRepository;
-    private final ReminderMapper reminderMapper;
 
     public List<Reminder> getRemindersToBeSend(Integer minutes) {
         LocalDateTime nextMinutes = LocalDateTime.now().plusMinutes(minutes);
@@ -27,13 +26,18 @@ public class ReminderService {
     }
 
     public List<ReminderMessage> getReminderMessagesToBeSend(List<Reminder> reminders){
-        return reminders.stream().map(reminderMapper::toMessage).toList();
+        return reminders.stream().map(this::toMessage).toList();
     }
 
     public Integer getMinutesToExecute(Reminder reminder) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime reminderTime = reminder.getDateTime();
         return (int) now.until(reminderTime, ChronoUnit.MINUTES);
+    }
+
+    private ReminderMessage toMessage(Reminder reminder) {
+        String message = "Upcoming vaccination on " + reminder.getScheduledVaccination().getDateTime();
+        return new ReminderMessage(message, reminder.getScheduledVaccination().getUser().getToken());
     }
 
 }
