@@ -1,5 +1,6 @@
 package org.mwdziak.vaccinationbackend.dto;
 
+import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -8,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ReminderMessage {
-    private Long id;
-    private String dateTime;
-    private String vaccinationDateTime;
-    private Long userId;
+    @Nonnull
+    private String reminderMessage;
+    @Nonnull
+    private String usersToken;
 }
