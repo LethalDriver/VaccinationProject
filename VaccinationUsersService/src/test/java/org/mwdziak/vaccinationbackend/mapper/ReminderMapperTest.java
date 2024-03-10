@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mwdziak.vaccinationbackend.domain.Reminder;
 import org.mwdziak.vaccinationbackend.domain.ScheduledVaccination;
-import org.mwdziak.vaccinationbackend.dto.ReminderDTO;
 import org.mwdziak.vaccinationbackend.dto.ReminderMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
