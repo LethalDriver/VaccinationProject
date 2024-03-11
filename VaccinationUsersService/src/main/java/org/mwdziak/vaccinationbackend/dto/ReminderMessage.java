@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReminderMessage {
     @Nonnull
+    private String reminderTitle;
+    @Nonnull
     private String reminderMessage;
     @Nonnull
     private String usersToken;

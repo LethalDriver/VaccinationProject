@@ -36,8 +36,9 @@ public class ReminderService {
     }
 
     private ReminderMessage toMessage(Reminder reminder) {
+        String title = "Vaccination reminder";
         String message = "Upcoming vaccination on " + reminder.getScheduledVaccination().getDateTime();
-        return new ReminderMessage(message, reminder.getScheduledVaccination().getUser().getNotificationToken());
+        return new ReminderMessage(message, title, reminder.getScheduledVaccination().getUser().getNotificationToken());
     }
 
 }
