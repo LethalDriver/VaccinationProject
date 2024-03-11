@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class KafkaConsumer {
     private final NotificationSender notificationSender;
-    @KafkaListener(topics = "vaccination-reminder")
+    @KafkaListener(topics = "reminders")
     public void getNotificationsToSend(ReminderMessage reminderMessage){
         notificationSender.sendNotification(reminderMessage.getReminderTitle(), reminderMessage.getReminderMessage(), reminderMessage.getUsersToken());
     }
