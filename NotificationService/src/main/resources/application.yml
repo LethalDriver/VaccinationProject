@@ -8,3 +8,4 @@ spring:
       group-id: notification-service
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
+
