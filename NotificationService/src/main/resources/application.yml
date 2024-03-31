@@ -9,7 +9,5 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring:
-          deserializer:
-            trusted:
-              packages: 'org.mwdziak.vaccinationbackend.dto'
-
+          json:
+            value.default.type: "org.mwdziak.notificationservice.dto.ReminderMessage"
