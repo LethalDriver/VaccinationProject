@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Mapper(uses = {ReminderMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
-public interface ScheduledVaccinationMapper extends DateParser {
-    @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "dateTimeToString")
-    @Mapping(source = "nextDoseDateTime", target = "nextDoseDateTime", qualifiedByName = "dateTimeToString")
+public interface ScheduledVaccinationMapper {
+    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
+    @Mapping(source = "nextDoseDateTime", target = "nextDoseDateTime", dateFormat = "yyyy-MM-dd HH:mm")
     ScheduledVaccinationDTO toDto(ScheduledVaccination scheduledVaccination);
 
-    @Mapping(source = "dateTime", target = "dateTime", qualifiedByName = "stringToDateTime")
-    @Mapping(source = "nextDoseDateTime", target = "nextDoseDateTime", qualifiedByName = "stringToDateTime")
+    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
+    @Mapping(source = "nextDoseDateTime", target = "nextDoseDateTime", dateFormat = "yyyy-MM-dd HH:mm")
     ScheduledVaccination toEntity(ScheduledVaccinationDTO scheduledVaccinationDTO);
 
     @AfterMapping
