@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.*;
 import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationDTO;
 import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationDTO;
+import org.mwdziak.vaccinationbackend.exception.NotificationTokenNotSetException;
 import org.mwdziak.vaccinationbackend.mapper.AdministeredVaccinationMapper;
 import org.mwdziak.vaccinationbackend.mapper.ScheduledVaccinationMapper;
 import org.mwdziak.vaccinationbackend.repository.AdministeredVaccinationRepository;
@@ -22,7 +23,10 @@ public class VaccinationService {
     private final AdministeredVaccinationRepository administeredVaccinationRepository;
     private final VaccineRepository vaccineRepository;
     public void scheduleVaccination(ScheduledVaccinationDTO scheduledVaccinationDTO) {
+        throwIfNoNotificationToken(scheduledVaccinationDTO);
+
         ScheduledVaccination scheduledVaccination = scheduledVaccinationMapper.toEntity(scheduledVaccinationDTO);
+
         User currentUser = userService.getCurrentUser();
         scheduledVaccination.setUser(currentUser);
         findAndSetVaccine(scheduledVaccinationDTO.vaccineId(), scheduledVaccination);
@@ -32,6 +36,8 @@ public class VaccinationService {
         scheduledVaccinationRepository.deleteById(id);
     }
     public void editScheduledVaccination(ScheduledVaccinationDTO scheduledVaccinationDTO) {
+        throwIfNoNotificationToken(scheduledVaccinationDTO);
+
         ScheduledVaccination updatedVaccination = scheduledVaccinationMapper.toEntity(scheduledVaccinationDTO);
 
         ScheduledVaccination existingVaccination = scheduledVaccinationRepository.findById(scheduledVaccinationDTO.id())
@@ -72,5 +78,13 @@ public class VaccinationService {
         var vaccine = vaccineRepository.findById(vaccineId)
                 .orElseThrow(() -> new EntityNotFoundException("Vaccine not found"));
         vaccination.setVaccine(vaccine);
+    }
+
+    private void throwIfNoNotificationToken(ScheduledVaccinationDTO scheduledVaccinationDTO) {
+        if (!scheduledVaccinationDTO.reminders().isEmpty()) {
+            if (userService.getCurrentUser().getNotificationToken() == null) {
+                throw new NotificationTokenNotSetException("User has no notification token");
+            }
+        }
     }
 }

@@ -39,6 +39,12 @@ public class GlobalExceptionHandler {
         return buildResponseEntity(HttpStatusCode.valueOf(500), "Internal server error");
     }
 
+    @ExceptionHandler(NotificationTokenNotSetException.class)
+    public ResponseEntity<ProblemDetail> handleNotificationTokenNotSetException(NotificationTokenNotSetException e) {
+        log.error("Notification token not set", e);
+        return buildResponseEntity(HttpStatusCode.valueOf(400), "Notifications are not enable on this device");
+    }
+
     private ResponseEntity<ProblemDetail> buildResponseEntity(HttpStatusCode status, String message) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, message);
         return new ResponseEntity<>(problemDetail, status);
