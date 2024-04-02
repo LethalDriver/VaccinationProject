@@ -17,7 +17,7 @@ public class Reminder {
     @GeneratedValue
     private Long id;
     private LocalDateTime dateTime;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private ScheduledVaccination scheduledVaccination;
     private boolean sent;
 }

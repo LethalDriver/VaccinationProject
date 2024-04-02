@@ -1,10 +1,7 @@
 package org.mwdziak.vaccinationbackend.domain;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +21,7 @@ public class Vaccine {
     @Nonnull
     private String name;
     private Integer recommendedAge;
-    @OneToMany(mappedBy = "vaccine")
+    @OneToMany(mappedBy = "vaccine", cascade = CascadeType.ALL)
     private List<RemainingDose> remainingDose;
 
     public Vaccine(@Nonnull String name, Integer recommendedAge, List<RemainingDose> remainingDoses) {

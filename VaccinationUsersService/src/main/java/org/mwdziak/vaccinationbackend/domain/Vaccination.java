@@ -15,9 +15,9 @@ public abstract class Vaccination {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Vaccine vaccine;
     @Nonnull
     private LocalDateTime dateTime;

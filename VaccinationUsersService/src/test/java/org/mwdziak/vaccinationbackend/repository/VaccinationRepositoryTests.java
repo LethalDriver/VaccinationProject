@@ -40,14 +40,12 @@ public class VaccinationRepositoryTests extends RepositoryTests{
 
         Vaccine vaccine1 = Vaccine.builder()
                 .name("testVaccine")
-                .doses(1)
                 .build();
 
         vaccineRepository.save(vaccine1);
 
         Vaccine vaccine2 = Vaccine.builder()
                 .name("testVaccine2")
-                .doses(2)
                 .build();
 
         vaccineRepository.save(vaccine2);
