@@ -23,4 +23,8 @@ public class VaccineService {
         Integer userAge = Period.between(userService.getCurrentUser().getDateOfBirth(), today).getYears();
         return vaccineRepository.findRecommendedVaccinesByAge(userAge).stream().map(vaccineMapper::toDto).toList();
     }
+
+    public List<VaccineDTO> findAllVaccines() {
+        return vaccineRepository.findAll().stream().map(vaccineMapper::toDto).toList();
+    }
 }

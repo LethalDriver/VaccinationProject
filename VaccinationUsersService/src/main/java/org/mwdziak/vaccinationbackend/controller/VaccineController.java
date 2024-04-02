@@ -16,8 +16,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VaccineController {
     private final VaccineService vaccineService;
-    @GetMapping
+    @GetMapping("recommended")
     public ResponseEntity<List<VaccineDTO>> getRecommendedVaccines() {
         return ResponseEntity.of(Optional.ofNullable(vaccineService.findVaccinationsRecommendedForUser()));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<VaccineDTO>> getAllVaccines() {
+        return ResponseEntity.ok(vaccineService.findAllVaccines());
     }
 }
