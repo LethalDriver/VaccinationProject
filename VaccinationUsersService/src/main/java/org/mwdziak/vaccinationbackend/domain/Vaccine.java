@@ -24,8 +24,12 @@ public class Vaccine {
     @Nonnull
     private String name;
     private Integer recommendedAge;
-    @Nonnull
-    private Integer doses;
     @OneToMany(mappedBy = "vaccine")
     private List<RemainingDose> remainingDose;
+
+    public Vaccine(@Nonnull String name, Integer recommendedAge, List<RemainingDose> remainingDoses) {
+        this.name = name;
+        this.recommendedAge = recommendedAge;
+        this.remainingDose = remainingDoses;
+    }
 }

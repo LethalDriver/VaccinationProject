@@ -20,4 +20,9 @@ public class RemainingDose {
     private Integer daysBeforePreviousDose;
     @ManyToOne(cascade = CascadeType.ALL)
     private Vaccine vaccine;
+
+    public RemainingDose(Integer doseNumber, Integer daysBeforePreviousDose) {
+        this.doseNumber = doseNumber;
+        this.daysBeforePreviousDose = daysBeforePreviousDose;
+    }
 }
