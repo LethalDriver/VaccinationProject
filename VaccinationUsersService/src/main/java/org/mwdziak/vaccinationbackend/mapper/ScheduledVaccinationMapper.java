@@ -2,12 +2,13 @@ package org.mwdziak.vaccinationbackend.mapper;
 
 import org.mapstruct.*;
 import org.mwdziak.vaccinationbackend.domain.ScheduledVaccination;
+import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationGetRequest;
 import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 
 @Mapper(uses = {ReminderMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface ScheduledVaccinationMapper {
     @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
-    ScheduledVaccinationPostRequest toDto(ScheduledVaccination scheduledVaccination);
+    ScheduledVaccinationGetRequest toDto(ScheduledVaccination scheduledVaccination);
 
     @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
     ScheduledVaccination toEntity(ScheduledVaccinationPostRequest scheduledVaccinationPostRequest);
