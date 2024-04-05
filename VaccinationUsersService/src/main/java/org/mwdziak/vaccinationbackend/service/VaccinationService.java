@@ -45,7 +45,7 @@ public class VaccinationService {
 
 
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
-        existingVaccination.setNextDoseDateTime(updatedVaccination.getNextDoseDateTime());
+        existingVaccination.setDoseNumber(updatedVaccination.getDoseNumber());
         existingVaccination.setReminders(updatedVaccination.getReminders());
         findAndSetVaccine(scheduledVaccinationDTO.vaccineId(), existingVaccination);
 
