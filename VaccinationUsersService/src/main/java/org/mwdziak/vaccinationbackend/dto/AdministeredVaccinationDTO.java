@@ -4,7 +4,7 @@ import jakarta.annotation.Nonnull;
 
 public record AdministeredVaccinationDTO(
         Long id,
-        @Nonnull Long vaccineId,
+        @Nonnull VaccineDTO vaccine,
         @Nonnull String dateTime,
         Integer doseNumber
 ) {
