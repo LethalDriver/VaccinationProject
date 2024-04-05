@@ -9,6 +9,7 @@ import org.mwdziak.vaccinationbackend.service.ReminderService;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.time.Instant;
 import java.util.List;
@@ -21,9 +22,11 @@ public class ReminderScheduler {
     private final ReminderEmitter reminderEmitter;
     private final TaskScheduler taskScheduler;
     private final ReminderRepository reminderRepository;
-    @Scheduled(fixedRate = 6000)
+    @Value("${reminder.getRemindersToBeSendInMinutes}")
+    private Integer getRemindersToBeSendInMinutes;
+    @Scheduled(fixedRateString = "${reminder.msToScanDb}")
     public void scheduleReminders() {
-        List<Reminder> reminders = reminderService.getRemindersToBeSend(5);
+        List<Reminder> reminders = reminderService.getRemindersToBeSend(getRemindersToBeSendInMinutes);
         List<ReminderMessage> reminderMessages = reminderService.getReminderMessagesToBeSend(reminders);
         for (int i = 0; i < reminders.size(); i++) {
             if (reminders.get(i).isSent()) {
