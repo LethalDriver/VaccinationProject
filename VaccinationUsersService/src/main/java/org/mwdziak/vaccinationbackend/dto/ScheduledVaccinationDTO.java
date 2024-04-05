@@ -8,7 +8,7 @@ public record ScheduledVaccinationDTO(
         Long id,
         @Nonnull Long vaccineId,
         @Nonnull String dateTime,
-        String nextDoseDateTime,
+        Integer doseNumber,
         List<ReminderRequest> reminders
 ){
 

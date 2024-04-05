@@ -21,4 +21,6 @@ public abstract class Vaccination {
     private Vaccine vaccine;
     @Nonnull
     private LocalDateTime dateTime;
+    @Nonnull
+    private Integer doseNumber;
 }
