@@ -17,9 +17,10 @@ public class VaccinationController {
         vaccinationService.scheduleVaccination(scheduledVaccinationPostRequest);
         return ResponseEntity.status(201).build();
     }
-    @PatchMapping("/schedule")
-    public ResponseEntity<Void> rescheduleVaccination(@RequestBody ScheduledVaccinationPostRequest scheduledVaccinationPostRequest) {
-        vaccinationService.editScheduledVaccination(scheduledVaccinationPostRequest);
+    @PutMapping("/schedule/{id}")
+    public ResponseEntity<Void> rescheduleVaccination(@RequestBody ScheduledVaccinationPostRequest scheduledVaccinationPostRequest,
+                                                      @PathVariable Long id) {
+        vaccinationService.editScheduledVaccination(scheduledVaccinationPostRequest, id);
         return ResponseEntity.status(204).build();
     }
     @DeleteMapping("/schedule/{id}")
@@ -34,9 +35,10 @@ public class VaccinationController {
         return ResponseEntity.status(201).build();
     }
 
-    @PatchMapping("/administered")
-    public ResponseEntity<Void> editAdministeredVaccination(@RequestBody AdministeredVaccinationPostRequest administeredVaccinationPostRequest) {
-        vaccinationService.editAdministeredVaccination(administeredVaccinationPostRequest);
+    @PutMapping("/administered/{id}")
+    public ResponseEntity<Void> editAdministeredVaccination(@RequestBody AdministeredVaccinationPostRequest administeredVaccinationPostRequest,
+                                                            @PathVariable Long id) {
+        vaccinationService.editAdministeredVaccination(administeredVaccinationPostRequest, id);
         return ResponseEntity.status(204).build();
     }
 

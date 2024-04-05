@@ -39,12 +39,12 @@ public class VaccinationService {
     public void deleteScheduledVaccination(Long id) {
         scheduledVaccinationRepository.deleteById(id);
     }
-    public void editScheduledVaccination(ScheduledVaccinationPostRequest scheduledVaccinationPostRequest) {
+    public void editScheduledVaccination(ScheduledVaccinationPostRequest scheduledVaccinationPostRequest, Long id) {
         throwIfNoNotificationToken(scheduledVaccinationPostRequest);
 
         ScheduledVaccination updatedVaccination = scheduledVaccinationMapper.toEntity(scheduledVaccinationPostRequest);
 
-        ScheduledVaccination existingVaccination = scheduledVaccinationRepository.findById(scheduledVaccinationPostRequest.id())
+        ScheduledVaccination existingVaccination = scheduledVaccinationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ScheduledVaccination not found"));
 
 
@@ -59,21 +59,23 @@ public class VaccinationService {
         AdministeredVaccination administeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationPostRequest);
         User currentUser = userService.getCurrentUser();
         administeredVaccination.setUser(currentUser);
-        findAndSetVaccine(administeredVaccinationPostRequest.id(), administeredVaccination);
+        findAndSetVaccine(administeredVaccinationPostRequest.vaccineId(), administeredVaccination);
+
         administeredVaccinationRepository.save(administeredVaccination);
     }
     public void deleteAdministeredVaccination(Long id) {
         administeredVaccinationRepository.deleteById(id);
     }
 
-    public void editAdministeredVaccination(AdministeredVaccinationPostRequest administeredVaccinationPostRequest) {
+    public void editAdministeredVaccination(AdministeredVaccinationPostRequest administeredVaccinationPostRequest, Long id) {
         AdministeredVaccination updatedVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationPostRequest);
 
-        AdministeredVaccination existingVaccination = administeredVaccinationRepository.findById(administeredVaccinationPostRequest.id())
+        AdministeredVaccination existingVaccination = administeredVaccinationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AdministeredVaccination not found"));
 
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
-        findAndSetVaccine(administeredVaccinationPostRequest.id(), existingVaccination);
+        existingVaccination.setDoseNumber(updatedVaccination.getDoseNumber());
+        findAndSetVaccine(administeredVaccinationPostRequest.vaccineId(), existingVaccination);
 
         administeredVaccinationRepository.save(existingVaccination);
     }
