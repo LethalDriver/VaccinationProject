@@ -46,6 +46,7 @@ public class VaccinationService {
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
         existingVaccination.setDoseNumber(updatedVaccination.getDoseNumber());
         existingVaccination.setReminders(updatedVaccination.getReminders());
+        existingVaccination.setVaccine(updatedVaccination.getVaccine());
 
         scheduledVaccinationRepository.save(existingVaccination);
     }
@@ -53,7 +54,6 @@ public class VaccinationService {
         AdministeredVaccination administeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationDTO);
         User currentUser = userService.getCurrentUser();
         administeredVaccination.setUser(currentUser);
-        findAndSetVaccine(administeredVaccinationDTO.id(), administeredVaccination);
         administeredVaccinationRepository.save(administeredVaccination);
     }
     public void deleteAdministeredVaccination(Long id) {
@@ -67,15 +67,10 @@ public class VaccinationService {
                 .orElseThrow(() -> new EntityNotFoundException("AdministeredVaccination not found"));
 
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
-        findAndSetVaccine(administeredVaccinationDTO.id(), existingVaccination);
+        existingVaccination.setDoseNumber(updatedVaccination.getDoseNumber());
+        existingVaccination.setVaccine(updatedVaccination.getVaccine());
 
         administeredVaccinationRepository.save(existingVaccination);
-    }
-
-    public <T extends Vaccination> void findAndSetVaccine(Long vaccineId, T vaccination) {
-        var vaccine = vaccineRepository.findById(vaccineId)
-                .orElseThrow(() -> new EntityNotFoundException("Vaccine not found"));
-        vaccination.setVaccine(vaccine);
     }
 
     private void throwIfNoNotificationToken(ScheduledVaccinationDTO scheduledVaccinationDTO) {
