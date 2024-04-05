@@ -29,6 +29,7 @@ public class VaccinationService {
 
         User currentUser = userService.getCurrentUser();
         scheduledVaccination.setUser(currentUser);
+        findAndSetVaccine(scheduledVaccinationDTO.vaccineId(), scheduledVaccination);
         scheduledVaccinationRepository.save(scheduledVaccination);
     }
     public void deleteScheduledVaccination(Long id) {
@@ -46,6 +47,7 @@ public class VaccinationService {
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
         existingVaccination.setDoseNumber(updatedVaccination.getDoseNumber());
         existingVaccination.setReminders(updatedVaccination.getReminders());
+        findAndSetVaccine(scheduledVaccinationDTO.vaccineId(), existingVaccination);
 
         scheduledVaccinationRepository.save(existingVaccination);
     }
