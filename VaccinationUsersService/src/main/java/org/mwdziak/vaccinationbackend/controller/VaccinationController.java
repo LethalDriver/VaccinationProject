@@ -1,11 +1,15 @@
 package org.mwdziak.vaccinationbackend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationGetRequest;
 import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationGetRequest;
 import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.service.VaccinationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,5 +50,15 @@ public class VaccinationController {
     public ResponseEntity<Void> deleteAdministeredVaccination(@PathVariable Long id) {
         vaccinationService.deleteAdministeredVaccination(id);
         return ResponseEntity.status(204).build();
+    }
+
+    @GetMapping("/administered/user")
+    public ResponseEntity<List<AdministeredVaccinationGetRequest>> getAdministeredVaccinationsForUser() {
+        return ResponseEntity.ok(vaccinationService.getCurrentUsersAdministeredVaccinations());
+    }
+
+    @GetMapping("/schedule/user")
+    public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinationsForUser() {
+        return ResponseEntity.ok(vaccinationService.getCurrentUsersScheduledVaccinations());
     }
 }

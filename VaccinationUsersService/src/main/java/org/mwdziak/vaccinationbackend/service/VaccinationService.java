@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.*;
 import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationGetRequest;
 import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationGetRequest;
 import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.exception.NotificationTokenNotSetException;
 import org.mwdziak.vaccinationbackend.mapper.AdministeredVaccinationMapper;
@@ -94,8 +95,13 @@ public class VaccinationService {
         }
     }
 
-    private List<AdministeredVaccinationGetRequest> getCurrentUsersAdministeredVaccinations() {
+    public List<AdministeredVaccinationGetRequest> getCurrentUsersAdministeredVaccinations() {
         var currentUserId = userService.getCurrentUser().getId();
         return administeredVaccinationRepository.findAllByUserId(currentUserId).stream().map(administeredVaccinationMapper::toDto).toList();
+    }
+
+    public List<ScheduledVaccinationGetRequest> getCurrentUsersScheduledVaccinations() {
+        var currentUserId = userService.getCurrentUser().getId();
+        return scheduledVaccinationRepository.findAllByUserId(currentUserId).stream().map(scheduledVaccinationMapper::toDto).toList();
     }
 }
