@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 @Configuration
@@ -32,7 +33,20 @@ public class FirebaseConfiguration {
 
     @Bean
     GoogleCredentials googleCredentials() throws IOException {
-        return GoogleCredentials.fromStream(new ClassPathResource(firebaseConfigPath).getInputStream());
+        return GoogleCredentials.fromStream(new ByteArrayInputStream(
+                String.format(
+                        "{ \"type\": \"service_account\", \"project_id\": \"%s\", \"private_key_id\": \"%s\", \"private_key\": \"%s\", \"client_email\": \"%s\", \"client_id\": \"%s\", \"auth_uri\": \"%s\", \"token_uri\": \"%s\", \"auth_provider_x509_cert_url\": \"%s\", \"client_x509_cert_url\": \"%s\" }",
+                        System.getenv("FIREBASE_PROJECT_ID"),
+                        System.getenv("FIREBASE_PRIVATE_KEY_ID"),
+                        System.getenv("FIREBASE_PRIVATE_KEY").replace("\\n", "\n"),
+                        System.getenv("FIREBASE_CLIENT_EMAIL"),
+                        System.getenv("FIREBASE_CLIENT_ID"),
+                        System.getenv("FIREBASE_AUTH_URI"),
+                        System.getenv("FIREBASE_TOKEN_URI"),
+                        System.getenv("FIREBASE_AUTH_PROVIDER_X509_CERT_URL"),
+                        System.getenv("FIREBASE_CLIENT_X509_CERT_URL")
+                ).getBytes())
+        );
     }
 
 }
