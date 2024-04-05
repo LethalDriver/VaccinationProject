@@ -7,6 +7,7 @@ LABEL maintainer="LethalDriver@example.com"
 # Add a volume pointing to /tmp
 VOLUME /tmp
 
+
 # The application's jar file
 ARG JAR_FILE=target/my-application-0.0.1-SNAPSHOT.jar
 
