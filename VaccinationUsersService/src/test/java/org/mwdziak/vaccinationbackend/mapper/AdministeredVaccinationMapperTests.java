@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mwdziak.vaccinationbackend.domain.AdministeredVaccination;
 import org.mwdziak.vaccinationbackend.domain.Vaccine;
-import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationDTO;
+import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationPostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -28,7 +28,7 @@ public class AdministeredVaccinationMapperTests {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private AdministeredVaccination administeredVaccination;
-    private AdministeredVaccinationDTO administeredVaccinationDTO;
+    private AdministeredVaccinationPostRequest administeredVaccinationPostRequest;
 
     @BeforeEach
     public void setUp() {
@@ -36,24 +36,24 @@ public class AdministeredVaccinationMapperTests {
         administeredVaccination.setVaccine(new Vaccine());
         administeredVaccination.setDateTime(LocalDateTime.parse(DATE_TIME_STRING, FORMATTER));
 
-        administeredVaccinationDTO = administeredVaccinationMapper.toDto(administeredVaccination);
+        administeredVaccinationPostRequest = administeredVaccinationMapper.toDto(administeredVaccination);
     }
 
     @Test
     public void shouldMapAdministeredVaccinationToAdministeredVaccinationDTO() {
         assertAll(
-                () -> assertEquals(administeredVaccination.getVaccine().getId(), administeredVaccinationDTO.vaccineId()),
-                () -> assertEquals(administeredVaccination.getDateTime(), LocalDateTime.parse(administeredVaccinationDTO.dateTime(), FORMATTER))
+                () -> assertEquals(administeredVaccination.getVaccine().getId(), administeredVaccinationPostRequest.vaccineId()),
+                () -> assertEquals(administeredVaccination.getDateTime(), LocalDateTime.parse(administeredVaccinationPostRequest.dateTime(), FORMATTER))
         );
     }
 
     @Test
     public void shouldMapAdministeredVaccinationDTOToAdministeredVaccination() {
-        AdministeredVaccination mappedAdministeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationDTO);
+        AdministeredVaccination mappedAdministeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationPostRequest);
 
         assertAll(
-                () -> assertEquals(administeredVaccinationDTO.vaccineId(), mappedAdministeredVaccination.getVaccine().getId()),
-                () -> assertEquals(administeredVaccinationDTO.dateTime(), mappedAdministeredVaccination.getDateTime().format(FORMATTER))
+                () -> assertEquals(administeredVaccinationPostRequest.vaccineId(), mappedAdministeredVaccination.getVaccine().getId()),
+                () -> assertEquals(administeredVaccinationPostRequest.dateTime(), mappedAdministeredVaccination.getDateTime().format(FORMATTER))
         );
     }
 }

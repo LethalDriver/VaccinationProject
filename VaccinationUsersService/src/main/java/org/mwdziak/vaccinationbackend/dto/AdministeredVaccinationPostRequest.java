@@ -2,14 +2,10 @@ package org.mwdziak.vaccinationbackend.dto;
 
 import jakarta.annotation.Nonnull;
 
-import java.util.List;
-
-public record ScheduledVaccinationDTO(
+public record AdministeredVaccinationPostRequest(
         Long id,
         @Nonnull Long vaccineId,
         @Nonnull String dateTime,
-        Integer doseNumber,
-        List<ReminderRequest> reminders
-){
-
+        Integer doseNumber
+) {
 }

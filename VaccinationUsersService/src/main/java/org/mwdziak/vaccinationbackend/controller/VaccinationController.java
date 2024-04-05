@@ -1,8 +1,8 @@
 package org.mwdziak.vaccinationbackend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationDTO;
-import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationDTO;
+import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.service.VaccinationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class VaccinationController {
     private final VaccinationService vaccinationService;
     @PostMapping("/schedule")
-    public ResponseEntity<Void> scheduleVaccination(@RequestBody ScheduledVaccinationDTO scheduledVaccinationDTO) {
-        vaccinationService.scheduleVaccination(scheduledVaccinationDTO);
+    public ResponseEntity<Void> scheduleVaccination(@RequestBody ScheduledVaccinationPostRequest scheduledVaccinationPostRequest) {
+        vaccinationService.scheduleVaccination(scheduledVaccinationPostRequest);
         return ResponseEntity.status(201).build();
     }
     @PatchMapping("/schedule")
-    public ResponseEntity<Void> rescheduleVaccination(@RequestBody ScheduledVaccinationDTO scheduledVaccinationDTO) {
-        vaccinationService.editScheduledVaccination(scheduledVaccinationDTO);
+    public ResponseEntity<Void> rescheduleVaccination(@RequestBody ScheduledVaccinationPostRequest scheduledVaccinationPostRequest) {
+        vaccinationService.editScheduledVaccination(scheduledVaccinationPostRequest);
         return ResponseEntity.status(204).build();
     }
     @DeleteMapping("/schedule/{id}")
@@ -29,14 +29,14 @@ public class VaccinationController {
     }
 
     @PostMapping("/administered")
-    public ResponseEntity<Void> administerVaccination(@RequestBody AdministeredVaccinationDTO administeredVaccinationDTO) {
-        vaccinationService.addAdministeredVaccination(administeredVaccinationDTO);
+    public ResponseEntity<Void> administerVaccination(@RequestBody AdministeredVaccinationPostRequest administeredVaccinationPostRequest) {
+        vaccinationService.addAdministeredVaccination(administeredVaccinationPostRequest);
         return ResponseEntity.status(201).build();
     }
 
     @PatchMapping("/administered")
-    public ResponseEntity<Void> editAdministeredVaccination(@RequestBody AdministeredVaccinationDTO administeredVaccinationDTO) {
-        vaccinationService.editAdministeredVaccination(administeredVaccinationDTO);
+    public ResponseEntity<Void> editAdministeredVaccination(@RequestBody AdministeredVaccinationPostRequest administeredVaccinationPostRequest) {
+        vaccinationService.editAdministeredVaccination(administeredVaccinationPostRequest);
         return ResponseEntity.status(204).build();
     }
 
