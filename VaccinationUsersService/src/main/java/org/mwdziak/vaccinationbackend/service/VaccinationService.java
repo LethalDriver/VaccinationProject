@@ -3,6 +3,7 @@ package org.mwdziak.vaccinationbackend.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.*;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationGetRequest;
 import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.exception.NotificationTokenNotSetException;
@@ -12,6 +13,8 @@ import org.mwdziak.vaccinationbackend.repository.AdministeredVaccinationReposito
 import org.mwdziak.vaccinationbackend.repository.ScheduledVaccinationRepository;
 import org.mwdziak.vaccinationbackend.repository.VaccineRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +33,7 @@ public class VaccinationService {
         User currentUser = userService.getCurrentUser();
         scheduledVaccination.setUser(currentUser);
         findAndSetVaccine(scheduledVaccinationPostRequest.vaccineId(), scheduledVaccination);
+
         scheduledVaccinationRepository.save(scheduledVaccination);
     }
     public void deleteScheduledVaccination(Long id) {
@@ -86,5 +90,10 @@ public class VaccinationService {
                 throw new NotificationTokenNotSetException("User has no notification token");
             }
         }
+    }
+
+    private List<AdministeredVaccinationGetRequest> getCurrentUsersAdministeredVaccinations() {
+        var currentUserId = userService.getCurrentUser().getId();
+        return administeredVaccinationRepository.findAllByUserId(currentUserId).stream().map(administeredVaccinationMapper::toDto).toList();
     }
 }

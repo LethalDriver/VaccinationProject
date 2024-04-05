@@ -6,7 +6,6 @@ import org.mwdziak.vaccinationbackend.dto.reminder.ReminderRequest;
 import java.util.List;
 
 public record ScheduledVaccinationPostRequest(
-        Long id,
         @Nonnull Long vaccineId,
         @Nonnull String dateTime,
         Integer doseNumber,
