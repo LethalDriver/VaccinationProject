@@ -1,18 +1,20 @@
-# Start with a base image containing Java runtime
-FROM openjdk:17-jdk-slim
+# Use the official maven/Java 17 image to create a build artifact.
+# https://hub.docker.com/_/maven
+FROM maven:3.8.4-openjdk-17-slim as builder
 
-# Add Maintainer Info
-LABEL maintainer="LethalDriver@example.com"
+# Copy local code to the container image.
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
 
-# Add a volume pointing to /tmp
-VOLUME /tmp
+# Build a release artifact.
+RUN mvn package -DskipTests
 
+# Use OpenJDK 17 for runtime
+FROM openjdk:17-slim
 
-# The application's jar file
-ARG JAR_FILE=target/my-application-0.0.1-SNAPSHOT.jar
+# Copy the jar to the production image from the builder stage.
+COPY --from=builder /app/target/*.jar /app.jar
 
-# Add the application's jar to the container
-ADD ${JAR_FILE} my-application.jar
-
-# Run the jar file
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/my-application.jar"]
+# Run the web service on container startup.
+CMD ["java", "-jar", "/app.jar"]

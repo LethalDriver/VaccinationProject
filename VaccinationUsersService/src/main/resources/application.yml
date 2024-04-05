@@ -10,7 +10,7 @@ spring:
 
 
   kafka:
-    bootstrap-servers: localhost:29092
+    bootstrap-servers: localhost:9092
     template:
       default-topic: reminders
     producer:

@@ -8,12 +8,20 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
     ports:
-      - 8083:3306
+      - 3306:3306
+    networks:
+      mynetwork:
+        aliases:
+          - db
 
   zookeeper:
     image: 'confluentinc/cp-zookeeper:latest'
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
+    networks:
+      mynetwork:
+        aliases:
+          - zookeeper
 
   kafka:
     image: 'confluentinc/cp-kafka:latest'
@@ -31,21 +39,10 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_JMX_PORT: 9997
       KAFKA_JMX_HOSTNAME: kafka
-
-  kafka-ui:
-    container_name: kafka-ui
-    image: provectuslabs/kafka-ui:latest
-    ports:
-      - 8080:8080
-    depends_on:
-      - zookeeper
-      - kafka
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      KAFKA_CLUSTERS_0_METRICS_PORT: 9997
-      DYNAMIC_CONFIG_ENABLED: 'true'
-
+    networks:
+      mynetwork:
+        aliases:
+          - kafka
   vaccinationusersservice:
     build:
       context: "/VaccinationUsersService"
@@ -55,6 +52,13 @@ services:
     depends_on:
       - db
       - kafka
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/test
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SERVER_PORT=8082
+    networks:
+      - mynetwork
 
   notificationservice:
     build:
@@ -65,3 +69,8 @@ services:
     depends_on:
       - db
       - kafka
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
