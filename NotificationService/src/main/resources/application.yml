@@ -4,7 +4,7 @@ app:
 spring:
   kafka:
     consumer:
-      bootstrap-servers: localhost:29092
+      bootstrap-servers: localhost:9092
       group-id: notification-service
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:

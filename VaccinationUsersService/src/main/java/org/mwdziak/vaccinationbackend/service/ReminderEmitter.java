@@ -1,8 +1,7 @@
 package org.mwdziak.vaccinationbackend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.mwdziak.vaccinationbackend.domain.Reminder;
-import org.mwdziak.vaccinationbackend.dto.ReminderMessage;
+import org.mwdziak.vaccinationbackend.dto.reminder.ReminderMessage;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 

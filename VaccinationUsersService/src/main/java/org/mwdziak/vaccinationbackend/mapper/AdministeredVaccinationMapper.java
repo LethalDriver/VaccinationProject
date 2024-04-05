@@ -4,14 +4,15 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mwdziak.vaccinationbackend.domain.AdministeredVaccination;
-import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationDTO;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationGetRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationPostRequest;
 
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface AdministeredVaccinationMapper {
     @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
-    AdministeredVaccinationDTO toDto(AdministeredVaccination administeredVaccination);
+    AdministeredVaccinationGetRequest toDto(AdministeredVaccination administeredVaccination);
     @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
-    AdministeredVaccination toEntity(AdministeredVaccinationDTO administeredVaccinationDTO);
+    AdministeredVaccination toEntity(AdministeredVaccinationPostRequest administeredVaccinationPostRequest);
 
 
 }

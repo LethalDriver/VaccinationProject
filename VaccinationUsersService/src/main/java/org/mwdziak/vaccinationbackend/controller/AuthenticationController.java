@@ -1,16 +1,16 @@
 package org.mwdziak.vaccinationbackend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.mwdziak.vaccinationbackend.dto.RegistrationRequest;
+import org.mwdziak.vaccinationbackend.dto.auth.RegistrationRequest;
 import org.mwdziak.vaccinationbackend.service.AuthenticationService;
 import org.mwdziak.vaccinationbackend.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.mwdziak.vaccinationbackend.dto.AuthenticationRequest;
-import org.mwdziak.vaccinationbackend.dto.AuthenticationResponse;
-import org.mwdziak.vaccinationbackend.dto.TokensDTO;
+import org.mwdziak.vaccinationbackend.dto.auth.AuthenticationRequest;
+import org.mwdziak.vaccinationbackend.dto.auth.AuthenticationResponse;
+import org.mwdziak.vaccinationbackend.dto.auth.TokensDTO;
 
 
 @RestController

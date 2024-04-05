@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mwdziak.vaccinationbackend.domain.User;
-import org.mwdziak.vaccinationbackend.dto.RegistrationRequest;
+import org.mwdziak.vaccinationbackend.dto.auth.RegistrationRequest;
 import org.mwdziak.vaccinationbackend.exception.UserAlreadyExistsException;
 import org.mwdziak.vaccinationbackend.repository.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -18,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;

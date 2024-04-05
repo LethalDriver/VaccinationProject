@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.User;
 import org.mwdziak.vaccinationbackend.dto.NotificationTokenRequest;
-import org.mwdziak.vaccinationbackend.dto.RegistrationRequest;
+import org.mwdziak.vaccinationbackend.dto.auth.RegistrationRequest;
 import org.mwdziak.vaccinationbackend.exception.UserAlreadyExistsException;
 import org.mwdziak.vaccinationbackend.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;

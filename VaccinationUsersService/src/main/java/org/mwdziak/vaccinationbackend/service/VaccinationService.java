@@ -3,8 +3,10 @@ package org.mwdziak.vaccinationbackend.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.*;
-import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationDTO;
-import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationDTO;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationGetRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationGetRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.exception.NotificationTokenNotSetException;
 import org.mwdziak.vaccinationbackend.mapper.AdministeredVaccinationMapper;
 import org.mwdziak.vaccinationbackend.mapper.ScheduledVaccinationMapper;
@@ -12,6 +14,8 @@ import org.mwdziak.vaccinationbackend.repository.AdministeredVaccinationReposito
 import org.mwdziak.vaccinationbackend.repository.ScheduledVaccinationRepository;
 import org.mwdziak.vaccinationbackend.repository.VaccineRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,54 +26,57 @@ public class VaccinationService {
     private final ScheduledVaccinationRepository scheduledVaccinationRepository;
     private final AdministeredVaccinationRepository administeredVaccinationRepository;
     private final VaccineRepository vaccineRepository;
-    public void scheduleVaccination(ScheduledVaccinationDTO scheduledVaccinationDTO) {
-        throwIfNoNotificationToken(scheduledVaccinationDTO);
+    public void scheduleVaccination(ScheduledVaccinationPostRequest scheduledVaccinationPostRequest) {
+        throwIfNoNotificationToken(scheduledVaccinationPostRequest);
 
-        ScheduledVaccination scheduledVaccination = scheduledVaccinationMapper.toEntity(scheduledVaccinationDTO);
+        ScheduledVaccination scheduledVaccination = scheduledVaccinationMapper.toEntity(scheduledVaccinationPostRequest);
 
         User currentUser = userService.getCurrentUser();
         scheduledVaccination.setUser(currentUser);
-        findAndSetVaccine(scheduledVaccinationDTO.vaccineId(), scheduledVaccination);
+        findAndSetVaccine(scheduledVaccinationPostRequest.vaccineId(), scheduledVaccination);
+
         scheduledVaccinationRepository.save(scheduledVaccination);
     }
     public void deleteScheduledVaccination(Long id) {
         scheduledVaccinationRepository.deleteById(id);
     }
-    public void editScheduledVaccination(ScheduledVaccinationDTO scheduledVaccinationDTO) {
-        throwIfNoNotificationToken(scheduledVaccinationDTO);
+    public void editScheduledVaccination(ScheduledVaccinationPostRequest scheduledVaccinationPostRequest, Long id) {
+        throwIfNoNotificationToken(scheduledVaccinationPostRequest);
 
-        ScheduledVaccination updatedVaccination = scheduledVaccinationMapper.toEntity(scheduledVaccinationDTO);
+        ScheduledVaccination updatedVaccination = scheduledVaccinationMapper.toEntity(scheduledVaccinationPostRequest);
 
-        ScheduledVaccination existingVaccination = scheduledVaccinationRepository.findById(scheduledVaccinationDTO.id())
+        ScheduledVaccination existingVaccination = scheduledVaccinationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("ScheduledVaccination not found"));
 
 
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
-        existingVaccination.setNextDoseDateTime(updatedVaccination.getNextDoseDateTime());
+        existingVaccination.setDoseNumber(updatedVaccination.getDoseNumber());
         existingVaccination.setReminders(updatedVaccination.getReminders());
-        findAndSetVaccine(scheduledVaccinationDTO.vaccineId(), existingVaccination);
+        findAndSetVaccine(scheduledVaccinationPostRequest.vaccineId(), existingVaccination);
 
         scheduledVaccinationRepository.save(existingVaccination);
     }
-    public void addAdministeredVaccination(AdministeredVaccinationDTO administeredVaccinationDTO) {
-        AdministeredVaccination administeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationDTO);
+    public void addAdministeredVaccination(AdministeredVaccinationPostRequest administeredVaccinationPostRequest) {
+        AdministeredVaccination administeredVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationPostRequest);
         User currentUser = userService.getCurrentUser();
         administeredVaccination.setUser(currentUser);
-        findAndSetVaccine(administeredVaccinationDTO.id(), administeredVaccination);
+        findAndSetVaccine(administeredVaccinationPostRequest.vaccineId(), administeredVaccination);
+
         administeredVaccinationRepository.save(administeredVaccination);
     }
     public void deleteAdministeredVaccination(Long id) {
         administeredVaccinationRepository.deleteById(id);
     }
 
-    public void editAdministeredVaccination(AdministeredVaccinationDTO administeredVaccinationDTO) {
-        AdministeredVaccination updatedVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationDTO);
+    public void editAdministeredVaccination(AdministeredVaccinationPostRequest administeredVaccinationPostRequest, Long id) {
+        AdministeredVaccination updatedVaccination = administeredVaccinationMapper.toEntity(administeredVaccinationPostRequest);
 
-        AdministeredVaccination existingVaccination = administeredVaccinationRepository.findById(administeredVaccinationDTO.id())
+        AdministeredVaccination existingVaccination = administeredVaccinationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AdministeredVaccination not found"));
 
         existingVaccination.setDateTime(updatedVaccination.getDateTime());
-        findAndSetVaccine(administeredVaccinationDTO.id(), existingVaccination);
+        existingVaccination.setDoseNumber(updatedVaccination.getDoseNumber());
+        findAndSetVaccine(administeredVaccinationPostRequest.vaccineId(), existingVaccination);
 
         administeredVaccinationRepository.save(existingVaccination);
     }
@@ -80,11 +87,21 @@ public class VaccinationService {
         vaccination.setVaccine(vaccine);
     }
 
-    private void throwIfNoNotificationToken(ScheduledVaccinationDTO scheduledVaccinationDTO) {
-        if (!scheduledVaccinationDTO.reminders().isEmpty()) {
+    private void throwIfNoNotificationToken(ScheduledVaccinationPostRequest scheduledVaccinationPostRequest) {
+        if (!scheduledVaccinationPostRequest.reminders().isEmpty()) {
             if (userService.getCurrentUser().getNotificationToken() == null) {
                 throw new NotificationTokenNotSetException("User has no notification token");
             }
         }
+    }
+
+    public List<AdministeredVaccinationGetRequest> getCurrentUsersAdministeredVaccinations() {
+        var currentUserId = userService.getCurrentUser().getId();
+        return administeredVaccinationRepository.findAllByUserId(currentUserId).stream().map(administeredVaccinationMapper::toDto).toList();
+    }
+
+    public List<ScheduledVaccinationGetRequest> getCurrentUsersScheduledVaccinations() {
+        var currentUserId = userService.getCurrentUser().getId();
+        return scheduledVaccinationRepository.findAllByUserId(currentUserId).stream().map(scheduledVaccinationMapper::toDto).toList();
     }
 }

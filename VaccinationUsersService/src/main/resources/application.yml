@@ -8,8 +8,9 @@ spring:
     hibernate:
       ddl-auto: create-drop
 
+
   kafka:
-    bootstrap-servers: localhost:29092
+    bootstrap-servers: localhost:9092
     template:
       default-topic: reminders
     producer:
@@ -20,3 +21,8 @@ spring:
 
 server:
   port: 8081
+
+reminder:
+  getRemindersToBeSendInMinutes: 5
+  msToScanDb: 60000
+
