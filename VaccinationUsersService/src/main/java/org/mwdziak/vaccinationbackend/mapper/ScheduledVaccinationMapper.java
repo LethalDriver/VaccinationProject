@@ -10,7 +10,7 @@ import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationDTO;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Mapper(uses = {ReminderMapper.class, VaccineMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
+@Mapper(uses = {ReminderMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface ScheduledVaccinationMapper {
     @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
     ScheduledVaccinationDTO toDto(ScheduledVaccination scheduledVaccination);

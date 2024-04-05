@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
 import org.mwdziak.vaccinationbackend.domain.AdministeredVaccination;
 import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationDTO;
 
-@Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring", uses = {VaccineMapper.class})
+@Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface AdministeredVaccinationMapper {
     @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
     AdministeredVaccinationDTO toDto(AdministeredVaccination administeredVaccination);
