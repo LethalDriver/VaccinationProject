@@ -1,4 +1,4 @@
-package org.mwdziak.vaccinationbackend.dto;
+package org.mwdziak.vaccinationbackend.dto.reminder;
 
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;

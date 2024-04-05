@@ -2,18 +2,13 @@ package org.mwdziak.vaccinationbackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.Reminder;
-import org.mwdziak.vaccinationbackend.dto.ReminderMessage;
-import org.mwdziak.vaccinationbackend.mapper.ReminderMapper;
+import org.mwdziak.vaccinationbackend.dto.reminder.ReminderMessage;
 import org.mwdziak.vaccinationbackend.repository.ReminderRepository;
-import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor

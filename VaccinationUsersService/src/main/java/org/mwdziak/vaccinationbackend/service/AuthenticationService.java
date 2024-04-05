@@ -4,9 +4,9 @@ package org.mwdziak.vaccinationbackend.service;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.BlacklistedToken;
 
-import org.mwdziak.vaccinationbackend.dto.AuthenticationRequest;
-import org.mwdziak.vaccinationbackend.dto.AuthenticationResponse;
-import org.mwdziak.vaccinationbackend.dto.TokensDTO;
+import org.mwdziak.vaccinationbackend.dto.auth.AuthenticationRequest;
+import org.mwdziak.vaccinationbackend.dto.auth.AuthenticationResponse;
+import org.mwdziak.vaccinationbackend.dto.auth.TokensDTO;
 import org.mwdziak.vaccinationbackend.exception.TokenBlacklistedException;
 import org.mwdziak.vaccinationbackend.repository.BlacklistedTokenRepository;
 import org.mwdziak.vaccinationbackend.repository.UserRepository;
@@ -15,7 +15,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

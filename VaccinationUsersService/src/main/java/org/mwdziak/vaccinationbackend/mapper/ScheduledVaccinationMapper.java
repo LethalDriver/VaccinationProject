@@ -2,7 +2,7 @@ package org.mwdziak.vaccinationbackend.mapper;
 
 import org.mapstruct.*;
 import org.mwdziak.vaccinationbackend.domain.ScheduledVaccination;
-import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 
 @Mapper(uses = {ReminderMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface ScheduledVaccinationMapper {

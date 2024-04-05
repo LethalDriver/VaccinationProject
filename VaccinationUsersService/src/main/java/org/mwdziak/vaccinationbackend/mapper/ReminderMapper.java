@@ -2,9 +2,7 @@ package org.mwdziak.vaccinationbackend.mapper;
 
 import org.mapstruct.*;
 import org.mwdziak.vaccinationbackend.domain.Reminder;
-import org.mwdziak.vaccinationbackend.domain.ScheduledVaccination;
-import org.mwdziak.vaccinationbackend.dto.ReminderRequest;
-import org.mwdziak.vaccinationbackend.dto.ReminderMessage;
+import org.mwdziak.vaccinationbackend.dto.reminder.ReminderRequest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

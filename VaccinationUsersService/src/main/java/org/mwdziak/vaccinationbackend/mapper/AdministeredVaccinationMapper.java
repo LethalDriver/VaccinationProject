@@ -4,7 +4,7 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mwdziak.vaccinationbackend.domain.AdministeredVaccination;
-import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationPostRequest;
 
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface AdministeredVaccinationMapper {

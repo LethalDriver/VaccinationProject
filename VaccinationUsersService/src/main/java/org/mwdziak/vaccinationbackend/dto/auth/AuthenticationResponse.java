@@ -1,13 +1,16 @@
-package org.mwdziak.vaccinationbackend.dto;
+package org.mwdziak.vaccinationbackend.dto.auth;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class TokensDTO {
+@NoArgsConstructor
+public class AuthenticationResponse {
     private String token;
     private String refreshToken;
+    private String expirationDate;
 }

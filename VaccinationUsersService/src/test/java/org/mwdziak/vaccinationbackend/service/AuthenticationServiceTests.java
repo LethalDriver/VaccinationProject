@@ -1,6 +1,5 @@
 package org.mwdziak.vaccinationbackend.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -8,8 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mwdziak.vaccinationbackend.domain.BlacklistedToken;
 import org.mwdziak.vaccinationbackend.domain.User;
-import org.mwdziak.vaccinationbackend.dto.AuthenticationRequest;
-import org.mwdziak.vaccinationbackend.dto.TokensDTO;
+import org.mwdziak.vaccinationbackend.dto.auth.AuthenticationRequest;
+import org.mwdziak.vaccinationbackend.dto.auth.TokensDTO;
 import org.mwdziak.vaccinationbackend.repository.BlacklistedTokenRepository;
 import org.mwdziak.vaccinationbackend.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;

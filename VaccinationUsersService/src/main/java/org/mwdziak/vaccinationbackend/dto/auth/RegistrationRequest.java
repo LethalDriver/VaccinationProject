@@ -1,4 +1,4 @@
-package org.mwdziak.vaccinationbackend.dto;
+package org.mwdziak.vaccinationbackend.dto.auth;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

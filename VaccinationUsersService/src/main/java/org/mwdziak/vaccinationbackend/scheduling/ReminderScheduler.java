@@ -2,7 +2,7 @@ package org.mwdziak.vaccinationbackend.scheduling;
 
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.Reminder;
-import org.mwdziak.vaccinationbackend.dto.ReminderMessage;
+import org.mwdziak.vaccinationbackend.dto.reminder.ReminderMessage;
 import org.mwdziak.vaccinationbackend.repository.ReminderRepository;
 import org.mwdziak.vaccinationbackend.service.ReminderEmitter;
 import org.mwdziak.vaccinationbackend.service.ReminderService;

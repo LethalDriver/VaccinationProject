@@ -1,8 +1,8 @@
 package org.mwdziak.vaccinationbackend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.mwdziak.vaccinationbackend.dto.AdministeredVaccinationPostRequest;
-import org.mwdziak.vaccinationbackend.dto.ScheduledVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.AdministeredVaccinationPostRequest;
+import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.service.VaccinationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
