@@ -6,15 +6,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  kafka:
-    bootstrap-servers: ${KAFKA_SERVERS}
-    template:
-      default-topic: reminders
-    producer:
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      properties:
-        spring.json.add.type.headers: false
+  cloud:
+    aws:
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+
+
 server:
   port: ${SERVER_PORT}
 reminder:
