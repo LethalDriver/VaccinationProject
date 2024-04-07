@@ -13,36 +13,6 @@ services:
       mynetwork:
         aliases:
           - db
-
-  zookeeper:
-    image: 'confluentinc/cp-zookeeper:latest'
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 8083
-    networks:
-      mynetwork:
-        aliases:
-          - zookeeper
-
-  kafka:
-    image: 'confluentinc/cp-kafka:latest'
-    ports:
-      - 29092:29092
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:8083
-      KAFKA_LISTENERS: INTERNAL://:9092
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_JMX_PORT: 9997
-      KAFKA_JMX_HOSTNAME: kafka
-    networks:
-      mynetwork:
-        aliases:
-          - kafka
   vaccinationusersservice:
     build:
       context: "/VaccinationUsersService"
@@ -51,14 +21,12 @@ services:
       - 8080:8080
     depends_on:
       - db
-      - kafka
     environment:
       DB_HOST: db
       DB_PORT: 3306
       DB_NAME: test
       DB_USERNAME: root
       DB_PASSWORD: root
-      KAFKA_SERVERS: kafka:9092
       SERVER_PORT: 8080
       REMINDERS_MINUTES: 5
       SCAN_DB_MS: 60000
@@ -71,8 +39,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8081:8081
-    depends_on:
-      - kafka
     environment:
       FIREBASE_TYPE: service_account
       FIREBASE_PROJECT_ID: notification-service-b1b97
@@ -84,21 +50,12 @@ services:
       FIREBASE_TOKEN_URI: https://oauth2.googleapis.com/token
       FIREBASE_AUTH_PROVIDER_X509_CERT_URL: https://www.googleapis.com/oauth2/v1/certs
       FIREBASE_CLIENT_X509_CERT_URL: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-tgiwx%40notification-service-b1b97.iam.gserviceaccount.comdoi
-      KAFKA_SERVERS: kafka:9092
-      KAFKA_GROUP_ID: notification-service
+      AWS_ACCESS_KEY: "AKIAZI2LCOVN77GFLHHR"
+      AWS_SECRET_KEY: "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"
       SERVER_PORT: 8081
     networks:
       - mynetwork
 
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    ports:
-      - 8082:8080
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-    networks:
-      - mynetwork
 
 networks:
   mynetwork:
