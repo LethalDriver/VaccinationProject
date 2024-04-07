@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  cloud:
+    aws:
+      credentials:
+        access-key: "AKIAZI2LCOVN77GFLHHR"
+        secret-key: "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"
+      region:
+        static: eu-north-1
+
+server:
+  port: 8080
+reminder:
+  getRemindersToBeSendInMinutes: 5
+  msToScanDb: 60000
