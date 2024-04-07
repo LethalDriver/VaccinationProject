@@ -78,7 +78,9 @@ services:
       FIREBASE_AUTH_URI: https://accounts.google.com/o/oauth2/auth
       FIREBASE_TOKEN_URI: https://oauth2.googleapis.com/token
       FIREBASE_AUTH_PROVIDER_X509_CERT_URL: https://www.googleapis.com/oauth2/v1/certs
-      FIREBASE_CLIENT_X509_CERT_URL: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-tgiwx%40notification-service-b1b97.iam.gserviceaccount.com
+      FIREBASE_CLIENT_X509_CERT_URL: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-tgiwx%40notification-service-b1b97.iam.gserviceaccount.comdoi
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_GROUP_ID: notification-service
     networks:
       - mynetwork
 
