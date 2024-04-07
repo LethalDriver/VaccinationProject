@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
     @Query("SELECT r FROM Reminder r WHERE r.dateTime between :start and :end and r.sent = false")
-    List<Reminder> findToBeSendInNextMinutes(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
+    List<Reminder> findToBeSendInNextMinutes(@Param("start") ZonedDateTime start, @Param("end") ZonedDateTime end);
 }

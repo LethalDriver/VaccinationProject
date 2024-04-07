@@ -5,6 +5,7 @@ import org.mwdziak.vaccinationbackend.domain.Reminder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,8 +16,8 @@ public class ReminderRepositoryTest extends RepositoryTests {
 
     @Test
     public void findToBeSendInNextMinutes_returnsRemindersWithinTimeRange() {
-        LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = start.plusMinutes(30);
+        ZonedDateTime start = ZonedDateTime.now();
+        ZonedDateTime end = start.plusMinutes(30);
 
         Reminder reminder = new Reminder();
         reminder.setDateTime(start.plusMinutes(15));
@@ -31,8 +32,8 @@ public class ReminderRepositoryTest extends RepositoryTests {
 
     @Test
     public void findToBeSendInNextMinutes_returnsEmptyListWhenNoRemindersWithinTimeRange() {
-        LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = start.plusMinutes(30);
+        ZonedDateTime start = ZonedDateTime.now();
+        ZonedDateTime end = start.plusMinutes(30);
 
         List<Reminder> reminders = reminderRepository.findToBeSendInNextMinutes(start, end);
 

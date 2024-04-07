@@ -15,6 +15,7 @@ import org.springframework.scheduling.TaskScheduler;
 
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,12 +43,12 @@ public class ReminderServiceTests {
     @BeforeEach
     public void setup() {
         reminder = new Reminder();
-        reminder.setDateTime(LocalDateTime.now().plusMinutes(10));
+        reminder.setDateTime(ZonedDateTime.now().plusMinutes(10));
     }
 
     @Test
     public void should_return_reminders_to_be_send() {
-        when(reminderRepository.findToBeSendInNextMinutes(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(Arrays.asList(reminder));
+        when(reminderRepository.findToBeSendInNextMinutes(any(ZonedDateTime.class), any(ZonedDateTime.class))).thenReturn(Arrays.asList(reminder));
         List<Reminder> reminders = reminderService.getRemindersToBeSend(1);
         Assertions.assertEquals(1, reminders.size());
     }

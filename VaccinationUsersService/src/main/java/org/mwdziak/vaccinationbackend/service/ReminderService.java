@@ -7,6 +7,7 @@ import org.mwdziak.vaccinationbackend.repository.ReminderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -16,8 +17,8 @@ public class ReminderService {
     private final ReminderRepository reminderRepository;
 
     public List<Reminder> getRemindersToBeSend(Integer minutes) {
-        LocalDateTime nextMinutes = LocalDateTime.now().plusMinutes(minutes);
-        return reminderRepository.findToBeSendInNextMinutes(LocalDateTime.now(), nextMinutes);
+        ZonedDateTime nextMinutes = ZonedDateTime.now().plusMinutes(minutes);
+        return reminderRepository.findToBeSendInNextMinutes(ZonedDateTime.now(), nextMinutes);
     }
 
     public List<ReminderMessage> getReminderMessagesToBeSend(List<Reminder> reminders){
@@ -25,8 +26,8 @@ public class ReminderService {
     }
 
     public Integer getMinutesToExecute(Reminder reminder) {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime reminderTime = reminder.getDateTime();
+        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime reminderTime = reminder.getDateTime();
         return (int) now.until(reminderTime, ChronoUnit.MINUTES);
     }
 

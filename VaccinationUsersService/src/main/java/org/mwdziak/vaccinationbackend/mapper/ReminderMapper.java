@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
 
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface ReminderMapper {
-    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
+    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ")
     ReminderGetRequest toDto(Reminder reminder);
-    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
+    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ")
     Reminder toEntity(ReminderPostRequest reminderPostRequest);
 }
