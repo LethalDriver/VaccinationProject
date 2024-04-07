@@ -48,7 +48,7 @@ services:
       context: "/VaccinationUsersService"
       dockerfile: Dockerfile
     ports:
-      - 8081:8081
+      - 8080:8080
     depends_on:
       - db
       - kafka
@@ -56,7 +56,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/test
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      SERVER_PORT: 8082
+      SERVER_PORT: 8080
     networks:
       - mynetwork
 
@@ -65,7 +65,7 @@ services:
       context: "/NotificationService"
       dockerfile: Dockerfile
     ports:
-      - 8082:8082
+      - 8081:8081
     depends_on:
       - kafka
     environment:
@@ -81,6 +81,7 @@ services:
       FIREBASE_CLIENT_X509_CERT_URL: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-tgiwx%40notification-service-b1b97.iam.gserviceaccount.comdoi
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_KAFKA_CONSUMER_GROUP_ID: notification-service
+      SERVER_PORT: 8081
     networks:
       - mynetwork
 

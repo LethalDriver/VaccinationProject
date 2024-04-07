@@ -14,9 +14,6 @@ import java.io.IOException;
 
 @Configuration
 public class FirebaseConfiguration {
-
-    @Value("${app.firebase-configuration-file}")
-    private String firebaseConfigPath;
     @Bean
     FirebaseMessaging firebaseMessaging(FirebaseApp firebaseApp) {
         return FirebaseMessaging.getInstance(firebaseApp);
