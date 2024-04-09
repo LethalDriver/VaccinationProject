@@ -30,6 +30,9 @@ services:
       SERVER_PORT: 8080
       REMINDERS_MINUTES: 5
       SCAN_DB_MS: 60000
+      SPRING_PROFILES_ACTIVE: prod
+      AWS_ACCESS_KEY:
+      AWS_SECRET_KEY:
     networks:
       - mynetwork
 
@@ -50,8 +53,8 @@ services:
       FIREBASE_TOKEN_URI: https://oauth2.googleapis.com/token
       FIREBASE_AUTH_PROVIDER_X509_CERT_URL: https://www.googleapis.com/oauth2/v1/certs
       FIREBASE_CLIENT_X509_CERT_URL: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-tgiwx%40notification-service-b1b97.iam.gserviceaccount.comdoi
-      AWS_ACCESS_KEY: "AKIAZI2LCOVN77GFLHHR"
-      AWS_SECRET_KEY: "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"
+      AWS_ACCESS_KEY:
+      AWS_SECRET_KEY:
       SERVER_PORT: 8081
     networks:
       - mynetwork
