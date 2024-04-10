@@ -2,20 +2,20 @@ version: '3.1'
 
 services:
   db:
-    image: mysql:latest
+    image: postgres:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test
     ports:
-      - 3306:3306
+      - 5432:5432
     networks:
       mynetwork:
         aliases:
           - db
   vaccinationusersservice:
     build:
-      context: "/VaccinationUsersService"
+      context: "./VaccinationUsersService"
       dockerfile: Dockerfile
     ports:
       - 8080:8080
@@ -23,9 +23,9 @@ services:
       - db
     environment:
       DB_HOST: db
-      DB_PORT: 3306
+      DB_PORT: 5432
       DB_NAME: test
-      DB_USERNAME: root
+      DB_USERNAME: postgres
       DB_PASSWORD: root
       SERVER_PORT: 8080
       REMINDERS_MINUTES: 5
@@ -38,7 +38,7 @@ services:
 
   notificationservice:
     build:
-      context: "/NotificationService"
+      context: "./NotificationService"
       dockerfile: Dockerfile
     ports:
       - 8081:8081
