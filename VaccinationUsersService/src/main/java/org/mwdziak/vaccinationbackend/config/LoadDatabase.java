@@ -20,7 +20,7 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(UserRepository userRepository,
                                    PasswordEncoder passwordEncoder) {
         return args -> {
-            if (userRepository.findByUsername("admin").isEmpty()) {
+            if (userRepository.findByEmail("admin@email.com").isEmpty()) {
                 User admin = new User();
                 admin.setEmail("admin@email.com");
                 admin.setPassword(passwordEncoder.encode("admin"));
