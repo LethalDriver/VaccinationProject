@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/test
     username: postgres
-    password: root
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: create-drop
