@@ -17,17 +17,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LoadDatabase {
     @Bean
-    CommandLineRunner initDatabase(VaccineRepository repository, UserRepository userRepository,
+    CommandLineRunner initDatabase(UserRepository userRepository,
                                    PasswordEncoder passwordEncoder) {
         return args -> {
-            repository.save(new Vaccine("Pfizer", 12,
-                    List.of(new RemainingDose(1, 2), new RemainingDose(2,4))));
-            repository.save(new Vaccine("Moderna", 12,
-                    List.of(new RemainingDose(1, 2), new RemainingDose(2,4))));
-            userRepository.save(User.builder()
-                    .email("admin@email.com")
-                    .password(passwordEncoder.encode("password"))
-                    .build());
+            if (userRepository.findByUsername("admin").isEmpty()) {
+                User admin = new User();
+                admin.setEmail("admin@email.com");
+                admin.setPassword(passwordEncoder.encode("admin"));
+                userRepository.save(admin);
+            }
         };
     }
 }
