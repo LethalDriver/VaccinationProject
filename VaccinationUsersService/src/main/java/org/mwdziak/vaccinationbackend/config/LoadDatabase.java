@@ -1,17 +1,12 @@
 package org.mwdziak.vaccinationbackend.config;
 
 import lombok.RequiredArgsConstructor;
-import org.mwdziak.vaccinationbackend.domain.RemainingDose;
 import org.mwdziak.vaccinationbackend.domain.User;
-import org.mwdziak.vaccinationbackend.domain.Vaccine;
 import org.mwdziak.vaccinationbackend.repository.UserRepository;
-import org.mwdziak.vaccinationbackend.repository.VaccineRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor

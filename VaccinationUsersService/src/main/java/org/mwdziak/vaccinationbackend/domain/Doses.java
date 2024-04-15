@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RemainingDose {
+public class Doses {
     @Id
     @GeneratedValue
     private Long id;
@@ -21,7 +21,7 @@ public class RemainingDose {
     @ManyToOne(cascade = CascadeType.ALL)
     private Vaccine vaccine;
 
-    public RemainingDose(Integer doseNumber, Integer monthsAfterPreviousDose) {
+    public Doses(Integer doseNumber, Integer monthsAfterPreviousDose) {
         this.doseNumber = doseNumber;
         this.monthsAfterPreviousDose = monthsAfterPreviousDose;
     }
