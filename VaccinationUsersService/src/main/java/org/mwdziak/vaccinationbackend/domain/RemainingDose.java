@@ -17,12 +17,12 @@ public class RemainingDose {
     @GeneratedValue
     private Long id;
     private Integer doseNumber;
-    private Integer daysAfterPreviousDose;
+    private Integer monthsAfterPreviousDose;
     @ManyToOne(cascade = CascadeType.ALL)
     private Vaccine vaccine;
 
-    public RemainingDose(Integer doseNumber, Integer daysAfterPreviousDose) {
+    public RemainingDose(Integer doseNumber, Integer monthsAfterPreviousDose) {
         this.doseNumber = doseNumber;
-        this.daysAfterPreviousDose = daysAfterPreviousDose;
+        this.monthsAfterPreviousDose = monthsAfterPreviousDose;
     }
 }

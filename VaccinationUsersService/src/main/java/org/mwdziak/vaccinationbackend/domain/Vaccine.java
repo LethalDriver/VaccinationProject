@@ -20,13 +20,14 @@ public class Vaccine {
     private Long id;
     @Nonnull
     private String name;
-    private Integer recommendedAge;
+    private Integer recommendedAgeMonthsLowerBound;
+    private Integer recommendedAgeMonthsUpperBound;
     @OneToMany(mappedBy = "vaccine", cascade = CascadeType.ALL)
     private List<RemainingDose> remainingDose;
 
-    public Vaccine(@Nonnull String name, Integer recommendedAge, List<RemainingDose> remainingDoses) {
+    public Vaccine(@Nonnull String name, Integer recommendedAgeMonthsLowerBound, List<RemainingDose> remainingDoses) {
         this.name = name;
-        this.recommendedAge = recommendedAge;
+        this.recommendedAgeMonthsLowerBound = recommendedAgeMonthsLowerBound;
         this.remainingDose = remainingDoses;
     }
 }

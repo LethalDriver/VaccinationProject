@@ -9,7 +9,8 @@ import java.util.List;
 public record VaccineDTO(
         Long id,
         @Nonnull String name,
-        Integer recommendedAge,
+        Integer recommendedAgeMonthsLowerBound,
+        Integer recommendedAgeMonthsUpperBound,
         @Nonnull Integer doses,
         List<RemainingDoseDTO> remainingDoses
 ) {
