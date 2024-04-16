@@ -4,13 +4,16 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   jpa:
-    hibernate:
-      ddl-auto: update
+    properties:
+        hibernate:
+          default_schema: db
   cloud:
     aws:
       credentials:
         access-key: ${AWS_ACCESS_KEY}
         secret-key: ${AWS_SECRET_KEY}
+      region:
+        static: eu-north-1
 
 
 server:
