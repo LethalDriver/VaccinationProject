@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
     public Optional<Vaccine> findByName(String name);
-    @Query("SELECT v FROM Vaccine v WHERE v.recommendedAgeMonthsLowerBound BETWEEN ?1 AND ?1 + 1 OR v.recommendedAgeMonthsLowerBound = NULL")
-    public List<Vaccine> findRecommendedVaccinesByAge(Integer age);
+    @Query("SELECT v FROM Vaccine v WHERE ?1 BETWEEN v.recommendedAgeMonthsLowerBound AND v.recommendedAgeMonthsUpperBound OR v.recommendedAgeMonthsUpperBound IS NULL")
+    public List<Vaccine> findRecommendedVaccinesByAge(Integer userAgeMonths);
 }
