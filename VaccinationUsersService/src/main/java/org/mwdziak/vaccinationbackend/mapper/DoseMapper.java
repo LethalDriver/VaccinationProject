@@ -6,7 +6,7 @@ import org.mwdziak.vaccinationbackend.domain.Doses;
 import org.mwdziak.vaccinationbackend.dto.DosesDTO;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
-public interface RemainingDoseMapper {
+public interface DoseMapper {
     DosesDTO toDto(Doses doses);
     Doses toEntity(DosesDTO dosesDTO);
 }
