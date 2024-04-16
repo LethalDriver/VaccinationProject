@@ -7,9 +7,11 @@ services:
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: test
-      volumes: ./vaccinations_dump.sql:/var/lib/postgresql/data/vaccination_dump.sql
+    volumes:
+      - ./sql_dump/vaccinations_dump.sql:/docker-entrypoint-initdb.d/vaccinations_dump.sql
+
     ports:
-      - 5432:5432
+      - 5321:5432
     networks:
       mynetwork:
         aliases:
