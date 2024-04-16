@@ -9,7 +9,6 @@ public record VaccineDTO(
         @Nonnull String name,
         Integer recommendedAgeMonthsLowerBound,
         Integer recommendedAgeMonthsUpperBound,
-        @Nonnull Integer doses,
-        List<DosesDTO> remainingDoses
+        List<DosesDTO> doses
 ) {
 }
