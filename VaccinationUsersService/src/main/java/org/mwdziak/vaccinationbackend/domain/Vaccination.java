@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Data
 @SuperBuilder
@@ -20,7 +21,7 @@ public abstract class Vaccination {
     @ManyToOne
     private Vaccine vaccine;
     @Nonnull
-    private LocalDateTime dateTime;
+    private ZonedDateTime dateTime;
     @Nonnull
     private Integer doseNumber;
 }

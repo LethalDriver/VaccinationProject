@@ -7,10 +7,10 @@ import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRe
 
 @Mapper(uses = {ReminderMapper.class}, builder = @Builder(disableBuilder = true), componentModel = "spring")
 public interface ScheduledVaccinationMapper {
-    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
+    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ")
     ScheduledVaccinationGetRequest toDto(ScheduledVaccination scheduledVaccination);
 
-    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd HH:mm")
+    @Mapping(source = "dateTime", target = "dateTime", dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ")
     ScheduledVaccination toEntity(ScheduledVaccinationPostRequest scheduledVaccinationPostRequest);
 
     @AfterMapping

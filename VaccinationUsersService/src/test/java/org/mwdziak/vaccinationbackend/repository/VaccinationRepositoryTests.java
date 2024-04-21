@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,13 +57,13 @@ public class VaccinationRepositoryTests extends RepositoryTests{
         AdministeredVaccination administeredVaccination1 = AdministeredVaccination.builder()
                 .user(user)
                 .vaccine(vaccineRepository.findByName("testVaccine").get())
-                .dateTime(LocalDateTime.now().minusDays(5))
+                .dateTime(ZonedDateTime.now().minusDays(10))
                 .build();
 
         AdministeredVaccination administeredVaccination2 = AdministeredVaccination.builder()
                 .user(user)
                 .vaccine(vaccineRepository.findByName("testVaccine2").get())
-                .dateTime(LocalDateTime.now().minusDays(20))
+                .dateTime(ZonedDateTime.now().minusDays(5))
                 .build();
 
         administeredVaccinationRepository.save(administeredVaccination1);
