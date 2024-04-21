@@ -7,6 +7,7 @@ import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationGetReq
 import org.mwdziak.vaccinationbackend.dto.vaccination.ScheduledVaccinationPostRequest;
 import org.mwdziak.vaccinationbackend.service.VaccinationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class VaccinationController {
         return ResponseEntity.status(201).build();
     }
     @PutMapping("/schedule/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> rescheduleVaccination(@RequestBody ScheduledVaccinationPostRequest scheduledVaccinationPostRequest,
                                                       @PathVariable Long id) {
         vaccinationService.editScheduledVaccination(scheduledVaccinationPostRequest, id);
@@ -40,6 +42,7 @@ public class VaccinationController {
     }
 
     @PutMapping("/administered/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> editAdministeredVaccination(@RequestBody AdministeredVaccinationPostRequest administeredVaccinationPostRequest,
                                                             @PathVariable Long id) {
         vaccinationService.editAdministeredVaccination(administeredVaccinationPostRequest, id);
@@ -60,5 +63,17 @@ public class VaccinationController {
     @GetMapping("/schedule/user")
     public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinationsForUser() {
         return ResponseEntity.ok(vaccinationService.getCurrentUsersScheduledVaccinations());
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/administered")
+    public ResponseEntity<List<AdministeredVaccinationGetRequest>> getAdministeredVaccinations() {
+        return ResponseEntity.ok(vaccinationService.getAllAdministeredVaccinations());
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/schedule")
+    public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinations() {
+        return ResponseEntity.ok(vaccinationService.getAllScheduledVaccinations());
     }
 }

@@ -104,4 +104,12 @@ public class VaccinationService {
         var currentUserId = userService.getCurrentUser().getId();
         return scheduledVaccinationRepository.findAllByUserId(currentUserId).stream().map(scheduledVaccinationMapper::toDto).toList();
     }
+
+    public List<AdministeredVaccinationGetRequest> getAllAdministeredVaccinations() {
+        return administeredVaccinationRepository.findAll().stream().map(administeredVaccinationMapper::toDto).toList();
+    }
+
+    public List<ScheduledVaccinationGetRequest> getAllScheduledVaccinations() {
+        return scheduledVaccinationRepository.findAll().stream().map(scheduledVaccinationMapper::toDto).toList();
+    }
 }
