@@ -15,6 +15,7 @@ import org.mwdziak.vaccinationbackend.repository.ScheduledVaccinationRepository;
 import org.mwdziak.vaccinationbackend.repository.VaccineRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -111,5 +112,24 @@ public class VaccinationService {
 
     public List<ScheduledVaccinationGetRequest> getAllScheduledVaccinations() {
         return scheduledVaccinationRepository.findAll().stream().map(scheduledVaccinationMapper::toDto).toList();
+    }
+
+    public List<ScheduledVaccinationGetRequest> getAllScheduledVaccinationsForConfirmationForCurrentUser() {
+        var vaccinations = scheduledVaccinationRepository.findAllByDateTimeAfterAndUserId(ZonedDateTime.now(), userService.getCurrentUser().getId());
+        return vaccinations.stream().map(scheduledVaccinationMapper::toDto).toList();
+    }
+
+    public AdministeredVaccinationGetRequest confirmScheduledVaccination(Long id) {
+        ScheduledVaccination scheduledVaccination = scheduledVaccinationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("ScheduledVaccination not found"));
+        AdministeredVaccination administeredVaccination = AdministeredVaccination.builder()
+                .dateTime(scheduledVaccination.getDateTime())
+                .doseNumber(scheduledVaccination.getDoseNumber())
+                .user(scheduledVaccination.getUser())
+                .vaccine(scheduledVaccination.getVaccine())
+                .build();
+        administeredVaccinationRepository.save(administeredVaccination);
+        scheduledVaccinationRepository.deleteById(id);
+        return administeredVaccinationMapper.toDto(administeredVaccination);
     }
 }

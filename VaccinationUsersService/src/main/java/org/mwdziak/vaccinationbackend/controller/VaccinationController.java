@@ -76,4 +76,14 @@ public class VaccinationController {
     public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinations() {
         return ResponseEntity.ok(vaccinationService.getAllScheduledVaccinations());
     }
+
+    @GetMapping("/scheduled/confirmation")
+    public ResponseEntity<List<ScheduledVaccinationGetRequest>> confirmScheduledVaccination() {
+        return ResponseEntity.ok(vaccinationService.getAllScheduledVaccinationsForConfirmationForCurrentUser());
+    }
+
+    @PatchMapping("/scheduled/confirmation/{id}")
+    public ResponseEntity<AdministeredVaccinationGetRequest> confirmScheduledVaccination(@PathVariable Long id) {
+        return ResponseEntity.ok(vaccinationService.confirmScheduledVaccination(id));
+    }
 }
