@@ -13,5 +13,5 @@ public interface ScheduledVaccinationRepository extends JpaRepository<ScheduledV
 
     List<ScheduledVaccination> findAllByUserId(Long currentUserId);
 
-    List<ScheduledVaccination> findAllByDateTimeAfterAndUserId(ZonedDateTime dateTime, Long userId);
+    List<ScheduledVaccination> findAllByDateTimeBeforeAndUserId(ZonedDateTime dateTime, Long userId);
 }

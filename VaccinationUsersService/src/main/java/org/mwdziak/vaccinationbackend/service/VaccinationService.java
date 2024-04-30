@@ -115,7 +115,7 @@ public class VaccinationService {
     }
 
     public List<ScheduledVaccinationGetRequest> getAllScheduledVaccinationsForConfirmationForCurrentUser() {
-        var vaccinations = scheduledVaccinationRepository.findAllByDateTimeAfterAndUserId(ZonedDateTime.now(), userService.getCurrentUser().getId());
+        var vaccinations = scheduledVaccinationRepository.findAllByDateTimeBeforeAndUserId(ZonedDateTime.now(), userService.getCurrentUser().getId());
         return vaccinations.stream().map(scheduledVaccinationMapper::toDto).toList();
     }
 

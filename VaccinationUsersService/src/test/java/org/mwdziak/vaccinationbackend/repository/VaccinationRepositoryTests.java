@@ -86,7 +86,7 @@ public class VaccinationRepositoryTests extends RepositoryTests{
         scheduledVaccinationRepository.save(scheduledVaccination1);
         scheduledVaccinationRepository.save(scheduledVaccination2);
 
-        List<ScheduledVaccination> scheduledVaccinations = scheduledVaccinationRepository.findAllByDateTimeAfterAndUserId(
+        List<ScheduledVaccination> scheduledVaccinations = scheduledVaccinationRepository.findAllByDateTimeBeforeAndUserId(
                 ZonedDateTime.now(), user.getId());
         assertEquals(1, scheduledVaccinations.size());
     }
