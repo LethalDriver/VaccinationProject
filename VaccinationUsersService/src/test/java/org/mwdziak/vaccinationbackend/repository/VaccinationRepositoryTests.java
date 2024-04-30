@@ -2,10 +2,7 @@ package org.mwdziak.vaccinationbackend.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mwdziak.vaccinationbackend.domain.AdministeredVaccination;
-import org.mwdziak.vaccinationbackend.domain.User;
-import org.mwdziak.vaccinationbackend.domain.Vaccination;
-import org.mwdziak.vaccinationbackend.domain.Vaccine;
+import org.mwdziak.vaccinationbackend.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
@@ -73,7 +70,24 @@ public class VaccinationRepositoryTests extends RepositoryTests{
         assertEquals(2, administeredVaccinations.size());
     }
     @Test
-    public void scheduledRepositoryShouldReturnAllVaccinationsForUser() {
+    public void scheduledRepositoryShouldReturnAllOverdueVaccinationsForUser() {
+        ScheduledVaccination scheduledVaccination1 = ScheduledVaccination.builder()
+                .user(user)
+                .vaccine(vaccineRepository.findByName("testVaccine").get())
+                .dateTime(ZonedDateTime.now().plusDays(10))
+                .build();
 
+        ScheduledVaccination scheduledVaccination2 = ScheduledVaccination.builder()
+                .user(user)
+                .vaccine(vaccineRepository.findByName("testVaccine2").get())
+                .dateTime(ZonedDateTime.now().minusDays(5))
+                .build();
+
+        scheduledVaccinationRepository.save(scheduledVaccination1);
+        scheduledVaccinationRepository.save(scheduledVaccination2);
+
+        List<ScheduledVaccination> scheduledVaccinations = scheduledVaccinationRepository.findAllByDateTimeAfterAndUserId(
+                ZonedDateTime.now(), user.getId());
+        assertEquals(1, scheduledVaccinations.size());
     }
 }
