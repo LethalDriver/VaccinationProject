@@ -2,12 +2,10 @@ package org.mwdziak.vaccinationbackend.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.dto.NotificationTokenRequest;
+import org.mwdziak.vaccinationbackend.dto.UserDetailsDTO;
 import org.mwdziak.vaccinationbackend.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,5 +16,10 @@ public class UserController {
     public ResponseEntity<Void> addNotificationToken(@RequestBody NotificationTokenRequest request) {
         userService.assignToken(request);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<UserDetailsDTO> getUserDetails() {
+        return ResponseEntity.ok(userService.getUserDetailsForCurrentUser());
     }
 }

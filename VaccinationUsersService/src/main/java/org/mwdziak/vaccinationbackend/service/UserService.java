@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.mwdziak.vaccinationbackend.domain.User;
 import org.mwdziak.vaccinationbackend.dto.NotificationTokenRequest;
+import org.mwdziak.vaccinationbackend.dto.UserDetailsDTO;
 import org.mwdziak.vaccinationbackend.dto.auth.RegistrationRequest;
 import org.mwdziak.vaccinationbackend.exception.UserAlreadyExistsException;
 import org.mwdziak.vaccinationbackend.repository.UserRepository;
@@ -58,6 +59,17 @@ public class UserService {
         var user = getCurrentUser();
         user.setNotificationToken(token.token());
         userRepository.save(user);
+    }
+
+    public UserDetailsDTO getUserDetailsForCurrentUser() {
+        var user = getCurrentUser();
+        return new UserDetailsDTO(
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getDateOfBirth().toString(),
+                user.getRole().name()
+        );
     }
 
 }
