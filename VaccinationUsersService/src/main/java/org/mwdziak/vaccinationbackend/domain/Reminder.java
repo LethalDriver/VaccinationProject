@@ -18,7 +18,7 @@ public class Reminder {
     @GeneratedValue
     private Long id;
     private ZonedDateTime dateTime;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private ScheduledVaccination scheduledVaccination;
     private boolean sent;
 }

@@ -18,7 +18,7 @@ public class Doses {
     private Long id;
     private Integer doseNumber;
     private Integer monthsAfterPreviousDose;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private Vaccine vaccine;
 
     public Doses(Integer doseNumber, Integer monthsAfterPreviousDose) {

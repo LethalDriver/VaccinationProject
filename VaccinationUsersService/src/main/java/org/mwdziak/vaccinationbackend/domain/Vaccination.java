@@ -16,9 +16,9 @@ public abstract class Vaccination {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Vaccine vaccine;
     @Nonnull
     private ZonedDateTime dateTime;
