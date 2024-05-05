@@ -96,8 +96,8 @@ CREATE TABLE db.administered_vaccination (
     dose_number integer,
     date_time timestamp(6) without time zone,
     id bigint NOT NULL,
-    user_id bigint,
-    vaccine_id bigint
+    user_id bigint NOT NULL,
+    vaccine_id bigint NOT NULL
 );
 
 
@@ -125,7 +125,7 @@ CREATE TABLE db.doses (
     dose_number integer,
     months_after_previous_dose integer,
     id bigint NOT NULL,
-    vaccine_id bigint
+    vaccine_id bigint NOT NULL
 );
 
 
@@ -153,7 +153,7 @@ CREATE TABLE db.reminder (
     sent boolean NOT NULL,
     date_time timestamp(6) with time zone,
     id bigint NOT NULL,
-    scheduled_vaccination_id bigint
+    scheduled_vaccination_id bigint NOT NULL
 );
 
 
@@ -181,8 +181,8 @@ CREATE TABLE db.scheduled_vaccination (
     dose_number integer,
     date_time timestamp(6) without time zone,
     id bigint NOT NULL,
-    user_id bigint,
-    vaccine_id bigint
+    user_id bigint NOT NULL,
+    vaccine_id bigint NOT NULL
 );
 
 
