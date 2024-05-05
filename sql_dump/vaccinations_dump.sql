@@ -94,7 +94,7 @@ ALTER SEQUENCE db._users_seq OWNER TO postgres;
 
 CREATE TABLE db.administered_vaccination (
     dose_number integer,
-    date_time timestamp(6) without time zone,
+    date_time timestamp(6) with time zone,
     id bigint NOT NULL,
     user_id bigint NOT NULL,
     vaccine_id bigint NOT NULL
@@ -179,7 +179,7 @@ ALTER SEQUENCE db.reminder_seq OWNER TO postgres;
 
 CREATE TABLE db.scheduled_vaccination (
     dose_number integer,
-    date_time timestamp(6) without time zone,
+    date_time timestamp(6) with time zone,
     id bigint NOT NULL,
     user_id bigint NOT NULL,
     vaccine_id bigint NOT NULL
