@@ -42,11 +42,6 @@ public class AdministeredVaccinationController {
         return ResponseEntity.ok(vaccinationService.getCurrentUsersAdministeredVaccinations());
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinationsForUser() {
-        return ResponseEntity.ok(vaccinationService.getCurrentUsersScheduledVaccinations());
-    }
-
     @Secured("ROLE_ADMIN")
     @GetMapping("/all")
     public ResponseEntity<List<AdministeredVaccinationGetRequest>> getAdministeredVaccinations() {

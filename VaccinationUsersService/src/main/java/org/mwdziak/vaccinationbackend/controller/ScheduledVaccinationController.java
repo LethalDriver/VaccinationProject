@@ -40,6 +40,11 @@ public class ScheduledVaccinationController {
         return ResponseEntity.ok(vaccinationService.getAllScheduledVaccinations());
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinationsForUser() {
+        return ResponseEntity.ok(vaccinationService.getCurrentUsersScheduledVaccinations());
+    }
+
     @GetMapping("/confirmation")
     public ResponseEntity<List<ScheduledVaccinationGetRequest>> confirmScheduledVaccination() {
         return ResponseEntity.ok(vaccinationService.getAllScheduledVaccinationsForConfirmationForCurrentUser());
