@@ -243,7 +243,6 @@ COPY db._blacklisted_tokens (id, token) FROM stdin;
 --
 
 COPY db._users (date_of_birth, role, id, email, first_name, last_name, notification_token, password) FROM stdin;
-\N	\N	1	admin@email.com	\N	\N	\N	$2a$10$k9oZmqxqK5cqXPUhUpzDCu3UvBnCjWbgLTsgdmjPziiGtV/YusM5m
 \.
 
 
