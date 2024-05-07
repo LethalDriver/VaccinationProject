@@ -45,6 +45,12 @@ public class ScheduledVaccinationController {
         return ResponseEntity.ok(vaccinationService.getCurrentUsersScheduledVaccinations());
     }
 
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinationsForUser(@PathVariable Long id) {
+        return ResponseEntity.ok(vaccinationService.getScheduledVaccinationsForUser(id));
+    }
+
     @GetMapping("/confirmation")
     public ResponseEntity<List<ScheduledVaccinationGetRequest>> confirmScheduledVaccination() {
         return ResponseEntity.ok(vaccinationService.getAllScheduledVaccinationsForConfirmationForCurrentUser());

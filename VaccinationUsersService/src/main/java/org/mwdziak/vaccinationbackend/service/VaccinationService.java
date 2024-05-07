@@ -132,4 +132,8 @@ public class VaccinationService {
         scheduledVaccinationRepository.deleteById(id);
         return administeredVaccinationMapper.toDto(administeredVaccination);
     }
+
+    public List<ScheduledVaccinationGetRequest> getScheduledVaccinationsForUser(Long id) {
+        return scheduledVaccinationRepository.findAllByUserId(id).stream().map(scheduledVaccinationMapper::toDto).toList();
+    }
 }
