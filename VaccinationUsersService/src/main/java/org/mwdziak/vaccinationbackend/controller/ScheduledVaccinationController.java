@@ -28,6 +28,11 @@ public class ScheduledVaccinationController {
         vaccinationService.editScheduledVaccination(scheduledVaccinationPostRequest, id);
         return ResponseEntity.status(204).build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduledVaccinationGetRequest> getScheduledVaccination(@PathVariable Long id) {
+        return ResponseEntity.ok(vaccinationService.getScheduledVaccination(id));
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> cancelVaccination(@PathVariable Long id) {
         vaccinationService.deleteScheduledVaccination(id);

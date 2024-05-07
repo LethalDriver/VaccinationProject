@@ -136,4 +136,9 @@ public class VaccinationService {
     public List<ScheduledVaccinationGetRequest> getScheduledVaccinationsForUser(Long id) {
         return scheduledVaccinationRepository.findAllByUserId(id).stream().map(scheduledVaccinationMapper::toDto).toList();
     }
+
+    public ScheduledVaccinationGetRequest getScheduledVaccination(Long id) {
+        return scheduledVaccinationMapper.toDto(scheduledVaccinationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("ScheduledVaccination not found")));
+    }
 }
