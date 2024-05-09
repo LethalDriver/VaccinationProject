@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -32,8 +33,9 @@ public class ReminderService {
     }
 
     private ReminderMessage toMessage(Reminder reminder) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String title = "Vaccination reminder";
-        String message = "Upcoming vaccination on " + reminder.getScheduledVaccination().getDateTime();
+        String message = "Upcoming vaccination on " + reminder.getScheduledVaccination().getDateTime().format(formatter);
         return new ReminderMessage(message, title, reminder.getScheduledVaccination().getUser().getNotificationToken());
     }
 
