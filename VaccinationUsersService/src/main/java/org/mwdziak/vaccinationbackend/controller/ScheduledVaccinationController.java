@@ -28,6 +28,11 @@ public class ScheduledVaccinationController {
         vaccinationService.editScheduledVaccination(scheduledVaccinationPostRequest, id);
         return ResponseEntity.status(204).build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduledVaccinationGetRequest> getScheduledVaccination(@PathVariable Long id) {
+        return ResponseEntity.ok(vaccinationService.getScheduledVaccination(id));
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> cancelVaccination(@PathVariable Long id) {
         vaccinationService.deleteScheduledVaccination(id);
@@ -43,6 +48,12 @@ public class ScheduledVaccinationController {
     @GetMapping("/user")
     public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinationsForUser() {
         return ResponseEntity.ok(vaccinationService.getCurrentUsersScheduledVaccinations());
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<ScheduledVaccinationGetRequest>> getScheduledVaccinationsForUser(@PathVariable Long id) {
+        return ResponseEntity.ok(vaccinationService.getScheduledVaccinationsForUser(id));
     }
 
     @GetMapping("/confirmation")
